@@ -15,7 +15,7 @@ namespace FirstFloor.ModernUI.App.Control
 
 
 
-        public string GuardarVendedor(string rut, string nombre, string fechaIngresoTrabajar, string fechaUltimoAcceso, int totalVentas,int tipo,string contrasena)
+        public string GuardarVendedor(string rut, string nombre, string fechaIngresoTrabajar, string fechaUltimoAcceso, int totalVentas, int tipo, string contrasena)
         {
             //Boolean guardar = false;
             string i = "";
@@ -32,7 +32,7 @@ namespace FirstFloor.ModernUI.App.Control
                 comm.Parameters.AddWithValue("@fechaUltimoAcceso", fechaUltimoAcceso);
                 comm.Parameters.AddWithValue("@totalVentas", totalVentas);
                 comm.Parameters.AddWithValue("@tipo", tipo);
-                comm.Parameters.AddWithValue("@contrasena",contrasena);
+                comm.Parameters.AddWithValue("@contrasena", contrasena);
 
 
                 comm.ExecuteNonQuery();
@@ -56,20 +56,20 @@ namespace FirstFloor.ModernUI.App.Control
         }
         public List<Vendedor> getVendedor()
         {
-            
+
             MySqlDataReader rdr = null;
             List<Vendedor> Listcliente = new List<Vendedor>();
 
             string consulta = "SELECT*FROM vendedor";
-            
+
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
-           
-            
+
+
 
             while (rdr.Read())
             {
-                Listcliente.Add(new Vendedor(rdr.GetString(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetInt32(4),rdr.GetInt32(5),rdr.GetString(6)));
+                Listcliente.Add(new Vendedor(rdr.GetString(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetInt32(4), rdr.GetInt32(5), rdr.GetString(6)));
 
             }
             getconexion.CerrarConexion();
@@ -80,19 +80,19 @@ namespace FirstFloor.ModernUI.App.Control
         }
         public Vendedor getVendedorbyRut(string rut)
         {
-            
+
             MySqlDataReader rdr = null;
             Vendedor cliente = null;
 
-            string consulta = "SELECT*FROM vendedor where rut=\""+rut+"\"";
+            string consulta = "SELECT*FROM vendedor where rut=\"" + rut + "\"";
 
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
-            
+
 
             while (rdr.Read())
             {
-                cliente=new Vendedor(rdr.GetString(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetInt32(4), rdr.GetInt32(5), rdr.GetString(6));
+                cliente = new Vendedor(rdr.GetString(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetInt32(4), rdr.GetInt32(5), rdr.GetString(6));
 
             }
             getconexion.CerrarConexion();
@@ -197,7 +197,7 @@ namespace FirstFloor.ModernUI.App.Control
                 MySqlCommand cmdCliente = new MySqlCommand("UPDATE vendedor set nombre=\"" + nombre + "\", contrasena=SHA(@contrasena) WHERE rut =\"" + rut + "\";", getconexion.getConexion());
                 cmdCliente.Parameters.AddWithValue("@contrasena", contrasena);
                 MySqlDataReader MyReader2 = cmdCliente.ExecuteReader();
-               
+
 
             }
             catch (Exception e)
@@ -259,7 +259,7 @@ namespace FirstFloor.ModernUI.App.Control
                 MySqlDataReader read2 = cmd.ExecuteReader();
                 while (read2.Read())
                 {
-                    if (read2.GetInt32(0)==1)
+                    if (read2.GetInt32(0) == 1)
                     {
                         res = true;
                     }
@@ -282,7 +282,7 @@ namespace FirstFloor.ModernUI.App.Control
         {
 
 
-            string consulta = "SELECT tipo FROM vendedor where rut=\""+rut+"\"";
+            string consulta = "SELECT tipo FROM vendedor where rut=\"" + rut + "\"";
             bool res = false;
 
             try
@@ -341,11 +341,11 @@ namespace FirstFloor.ModernUI.App.Control
             return res;
 
         }
-        public bool getExisteVendedor(string rut )
+        public bool getExisteVendedor(string rut)
         {
 
 
-            string consulta = "SELECT*FROM vendedor WHERE rut=\""+rut+"\"";
+            string consulta = "SELECT*FROM vendedor WHERE rut=\"" + rut + "\"";
             bool res = false;
 
             try
@@ -418,7 +418,7 @@ namespace FirstFloor.ModernUI.App.Control
                 MySqlDataReader read2 = cmd.ExecuteReader();
                 while (read2.Read())
                 {
-                    if (read2.GetInt32(0)==1)
+                    if (read2.GetInt32(0) == 1)
                     {
                         res = true;
                     }

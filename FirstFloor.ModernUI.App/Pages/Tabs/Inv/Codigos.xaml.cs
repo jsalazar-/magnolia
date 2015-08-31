@@ -218,15 +218,9 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
 
                     if (row != null)
                     {
-                        if (!IsNumber(row.idProducto))
-                        {
-                            txtCodigoToImprimir.Text = "";
 
-                        }
-                        else
-                        {
-                            txtCodigoToImprimir.Text = row.idProducto;
-                        }
+                        txtCodigoToImprimir.Text = row.idProducto;
+
                     }
                 }
             }

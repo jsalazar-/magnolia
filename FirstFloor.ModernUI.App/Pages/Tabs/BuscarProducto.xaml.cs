@@ -233,8 +233,11 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                     var row = (Producto)datagridProducto.SelectedItem;
                     if (row != null)
                     {
-                        cventas.txtidProducto.Text = row.idProducto;
-                        this.Close();
+                        if (!row.idProducto.Equals("Categoria sin productos"))
+                        {
+                            cventas.txtidProducto.Text = row.idProducto;
+                            this.Close();
+                        }
                     }
                 }
             }

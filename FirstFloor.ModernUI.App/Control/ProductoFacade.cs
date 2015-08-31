@@ -8,7 +8,7 @@ using System.Configuration;
 using System.Data;
 using FirstFloor.ModernUI.App.Modelo;
 
- 
+
 namespace FirstFloor.ModernUI.App.Control
 {
     class ProductoFacade
@@ -16,22 +16,22 @@ namespace FirstFloor.ModernUI.App.Control
         ConexionBD getconexion = new ConexionBD();
 
 
-        public string GuardarProducto(string idProducto, string nombre, string stock, string precioReal, string precio, string nombreCategoria, DateTime fecha,int idGenerado)
+        public string GuardarProducto(string idProducto, string nombre, string stock, string precioReal, string precio, string nombreCategoria, DateTime fecha, int idGenerado)
         {
             //Boolean guardar = false;
-            string i="";
+            string i = "";
 
             try
             {
-                
+
                 categoriaFacade ctf = new categoriaFacade();
                 string idCategoria = ctf.getCategoriaByNombre(nombreCategoria);
 
                 string consultinsert = "INSERT INTO producto(idProducto,nombre,stock,precioReal,precio,idCategoria,fecha,idGenerado) VALUES(@idProducto, @nombre,@stock,@precioReal,@precio,@idCategoria,@fecha,@idGenerado)";
 
-              //  string consultinsert  = "INSERT INTO producto(idProducto,nombre,stock,precio,idCategoria) VALUES("+idProducto+","+nombre+","+stock+","+precio+","+idCategoria+")";
-                MySqlCommand comm = new MySqlCommand(consultinsert,getconexion.getConexion());
-                comm.Parameters.AddWithValue("@idProducto",idProducto);
+                //  string consultinsert  = "INSERT INTO producto(idProducto,nombre,stock,precio,idCategoria) VALUES("+idProducto+","+nombre+","+stock+","+precio+","+idCategoria+")";
+                MySqlCommand comm = new MySqlCommand(consultinsert, getconexion.getConexion());
+                comm.Parameters.AddWithValue("@idProducto", idProducto);
                 comm.Parameters.AddWithValue("@nombre", nombre);
                 comm.Parameters.AddWithValue("@stock", stock);
                 comm.Parameters.AddWithValue("@precioReal", precioReal);
@@ -39,16 +39,16 @@ namespace FirstFloor.ModernUI.App.Control
                 comm.Parameters.AddWithValue("@idCategoria", idCategoria);
                 comm.Parameters.AddWithValue("@fecha", fecha);
                 comm.Parameters.AddWithValue("@idGenerado", idGenerado);
-                 
+
                 comm.ExecuteNonQuery();
                 getconexion.CerrarConexion();
 
-                //guardar = true;
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 //guardar = false;
                 i = e.ToString();
-            
+
             }
             return i;
 
@@ -57,7 +57,7 @@ namespace FirstFloor.ModernUI.App.Control
 
         public List<Producto> getProductobyNombre(string nombre)
         {
-            
+
             MySqlDataReader rdr = null;
             List<Producto> ListProducto = new List<Producto>();
 
@@ -65,7 +65,7 @@ namespace FirstFloor.ModernUI.App.Control
 
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
-             
+
 
             while (rdr.Read())
             {
@@ -179,9 +179,9 @@ namespace FirstFloor.ModernUI.App.Control
                 MySqlDataReader read2 = cmd.ExecuteReader();
                 while (read2.Read())
                 {
-                    
-                        res = read2.GetInt32(0).ToString();
-                    
+
+                    res = read2.GetInt32(0).ToString();
+
                 }
             }
             catch (Exception e)
@@ -213,7 +213,7 @@ namespace FirstFloor.ModernUI.App.Control
                 {
                     if (!read2.Equals(""))
                     {
-                        res=res+1 ;
+                        res = res + 1;
                     }
                 }
             }
@@ -273,7 +273,7 @@ namespace FirstFloor.ModernUI.App.Control
                 MySqlDataReader read2 = cmd.ExecuteReader();
                 while (read2.Read())
                 {
-                    res =Convert.ToInt32(read2.GetString(0));
+                    res = Convert.ToInt32(read2.GetString(0));
                 }
             }
             catch (Exception e)
@@ -324,8 +324,8 @@ namespace FirstFloor.ModernUI.App.Control
         public int getTotalProductosbyMes(DateTime mes)
         {
             categoriaFacade catF = new categoriaFacade();
-            
-            string consulta = "SELECT*FROM producto where month(fecha)="+mes.Month;
+
+            string consulta = "SELECT*FROM producto where month(fecha)=" + mes.Month;
             int res = 0;
 
             try
@@ -353,12 +353,12 @@ namespace FirstFloor.ModernUI.App.Control
             return res;
 
         }
-      
+
         public List<Producto> getProductos()
         {
             MySqlDataReader rdr = null;
             List<Producto> producto = new List<Producto>();
-            
+
             string consulta = "SELECT*FROM producto";
             //MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT*FROM producto", conexion.getConexion());
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
@@ -377,23 +377,23 @@ namespace FirstFloor.ModernUI.App.Control
         }
         public Producto getProductosByID(string idProducto)
         {
-            
+
             MySqlDataReader rdr = null;
             Producto producto = new Producto();
 
-            
-            string consulta = "SELECT*FROM producto WHERE idProducto=\""+idProducto+"\"";
+
+            string consulta = "SELECT*FROM producto WHERE idProducto=\"" + idProducto + "\"";
             //MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT*FROM producto", conexion.getConexion());
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
 
             while (rdr.Read())
             {
-               // producto.Add(new Producto(rdr.GetString(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetString(4)));
-                producto.idProducto=rdr.GetString(0);
-                producto.nombre=rdr.GetString(1);
-                producto.stock=rdr.GetString(2);
-                producto.precio= rdr.GetString(4);
+                // producto.Add(new Producto(rdr.GetString(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetString(4)));
+                producto.idProducto = rdr.GetString(0);
+                producto.nombre = rdr.GetString(1);
+                producto.stock = rdr.GetString(2);
+                producto.precio = rdr.GetString(4);
                 producto.idCategoria = rdr.GetInt32(5);
 
             }
@@ -405,7 +405,7 @@ namespace FirstFloor.ModernUI.App.Control
         }
         public string getIdProductosBynombreCategoria(string nombreCategoria)
         {
-            
+
             MySqlDataReader rdr = null;
             string producto = "";
             categoriaFacade ctf = new categoriaFacade();
@@ -415,12 +415,12 @@ namespace FirstFloor.ModernUI.App.Control
             //MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT*FROM producto", conexion.getConexion());
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
-            
+
 
             while (rdr.Read())
             {
                 producto = rdr.GetString(0);
-                
+
 
             }
             getconexion.CerrarConexion();
@@ -435,7 +435,7 @@ namespace FirstFloor.ModernUI.App.Control
             categoriaFacade ctf = new categoriaFacade();
             string idCategoria = ctf.getCategoriaByNombre(nombreCategoria);
 
-            string consulta = "SELECT*FROM producto WHERE idCategoria=\""+idCategoria+"\"";
+            string consulta = "SELECT*FROM producto WHERE idCategoria=\"" + idCategoria + "\"";
             //MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT*FROM producto", conexion.getConexion());
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
@@ -454,14 +454,14 @@ namespace FirstFloor.ModernUI.App.Control
 
             return producto;
         }
-        public List<Producto> getProductosBynombre(string nombre,string nombreCategoria)
+        public List<Producto> getProductosBynombre(string nombre, string nombreCategoria)
         {
             DataTable dtDatos = new DataTable();
             MySqlDataReader rdr = null;
             List<Producto> producto = new List<Producto>();
             categoriaFacade ctf = new categoriaFacade();
             string idCategoria = ctf.getCategoriaByNombre(nombreCategoria);
-            string consulta = "SELECT*FROM producto WHERE nombre=\"" + nombre + "\" AND idCategoria=\""+idCategoria+"\"";
+            string consulta = "SELECT*FROM producto WHERE nombre=\"" + nombre + "\" AND idCategoria=\"" + idCategoria + "\"";
             //MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT*FROM producto", conexion.getConexion());
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
@@ -480,8 +480,9 @@ namespace FirstFloor.ModernUI.App.Control
 
             return producto;
         }
-       
-        public Boolean borrarProductoBynombreCategoria(string nombreCategoria) {
+
+        public Boolean borrarProductoBynombreCategoria(string nombreCategoria)
+        {
             Boolean borrar = false;
             try
             {
@@ -492,18 +493,19 @@ namespace FirstFloor.ModernUI.App.Control
                 MySqlDataAdapter adapter = new MySqlDataAdapter();
 
 
-                
-                MySqlCommand cmdCategoria = new MySqlCommand("DELETE FROM producto WHERE idCategoria =\""+idCategoria+"\"", getconexion.getConexion());
+
+                MySqlCommand cmdCategoria = new MySqlCommand("DELETE FROM producto WHERE idCategoria =\"" + idCategoria + "\"", getconexion.getConexion());
                 cmdCategoria.ExecuteNonQuery();
-                
+
                 borrar = true;
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 borrar = false;
             }
             return borrar;
-        
-        
+
+
         }
 
         public Boolean borrarProductoYnombreCategoria(string nombreCategoria)
@@ -538,12 +540,12 @@ namespace FirstFloor.ModernUI.App.Control
             try
             {
                 categoriaFacade ctf = new categoriaFacade();
-                
+
 
                 MySqlCommand cmdCategoria = new MySqlCommand("DELETE FROM producto WHERE idProducto =\"" + idproducto + "\"", getconexion.getConexion());
                 cmdCategoria.ExecuteNonQuery();
 
-                
+
             }
             catch (Exception e)
             {
@@ -595,8 +597,8 @@ namespace FirstFloor.ModernUI.App.Control
         public string getIdCatbyidProd(string idProducto)
         {
             categoriaFacade ctf = new categoriaFacade();
-            
-            string consulta = "SELECT idCategoria FROM producto WHERE idProducto=" + idProducto;
+
+            string consulta = "SELECT idCategoria FROM producto WHERE idProducto=\"" + idProducto + "\"";
 
 
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
@@ -634,23 +636,23 @@ namespace FirstFloor.ModernUI.App.Control
 
             return mayorid.ToString();
         }
-        
-        
-            public string ActualizarProducto(string idProdAnt, string idProdNuevo,string nombre, string stock,string precioReal, string precio, string nombreCategoria,DateTime fecha)
+
+
+        public string ActualizarProducto(string idProdAnt, string idProdNuevo, string nombre, string stock, string precioReal, string precio, string nombreCategoria, DateTime fecha)
         {
             //Boolean guardar = false;
-            string res="";
+            string res = "";
 
             try
             {
-                
+
                 categoriaFacade ctf = new categoriaFacade();
                 string idCategoria = ctf.getCategoriaByNombre(nombreCategoria);
 
                 string consultinsert = "UPDATE  producto SET idProducto=@idProdNuevo,nombre=@nombre,stock=@stock,precioReal=@precioReal,precio=@precio,idCategoria=@idCategoria,fecha=@fecha WHERE idProducto=@idProdAnt";
 
-              
-                MySqlCommand comm = new MySqlCommand(consultinsert,getconexion.getConexion());
+
+                MySqlCommand comm = new MySqlCommand(consultinsert, getconexion.getConexion());
                 comm.Parameters.AddWithValue("@idProdNuevo", idProdNuevo);
                 comm.Parameters.AddWithValue("@nombre", nombre);
                 comm.Parameters.AddWithValue("@stock", stock);
@@ -659,16 +661,17 @@ namespace FirstFloor.ModernUI.App.Control
                 comm.Parameters.AddWithValue("@idCategoria", idCategoria);
                 comm.Parameters.AddWithValue("@fecha", fecha);
                 comm.Parameters.AddWithValue("@idProdAnt", idProdAnt);
-                
-                 MySqlDataReader MyReader2 = comm.ExecuteReader();
-                
+
+                MySqlDataReader MyReader2 = comm.ExecuteReader();
+
             }
             catch (Exception e)
             {
                 res = e.ToString();
                 getconexion.CerrarConexion();
             }
-            finally {
+            finally
+            {
                 getconexion.CerrarConexion();
             }
 
@@ -676,101 +679,101 @@ namespace FirstFloor.ModernUI.App.Control
             return res;
 
         }
-            public string actualizarStockProductoDevolucion(string idProducto, int stock)
+        public string actualizarStockProductoDevolucion(string idProducto, int stock)
+        {
+            //Boolean guardar = false;
+            string res = "";
+
+            try
             {
-                //Boolean guardar = false;
-                string res = "";
 
-                try
-                {
-
-                    int stockAnterior = Convert.ToInt32(getStockProductoByidProd(idProducto));
-                    int stockActualizado = stockAnterior + Convert.ToInt32(stock);
-                    string consultinsert = "UPDATE  producto SET stock=@stock WHERE idProducto=@idProducto";
+                int stockAnterior = Convert.ToInt32(getStockProductoByidProd(idProducto));
+                int stockActualizado = stockAnterior + Convert.ToInt32(stock);
+                string consultinsert = "UPDATE  producto SET stock=@stock WHERE idProducto=@idProducto";
 
 
-                    MySqlCommand comm = new MySqlCommand(consultinsert, getconexion.getConexion());
-                    comm.Parameters.AddWithValue("@idProducto", idProducto);
-                    comm.Parameters.AddWithValue("@stock", stockActualizado);
+                MySqlCommand comm = new MySqlCommand(consultinsert, getconexion.getConexion());
+                comm.Parameters.AddWithValue("@idProducto", idProducto);
+                comm.Parameters.AddWithValue("@stock", stockActualizado);
 
 
-                    MySqlDataReader MyReader2 = comm.ExecuteReader();
-
-                }
-                catch (Exception e)
-                {
-                    res = e.ToString();
-                    getconexion.CerrarConexion();
-                }
-                finally
-                {
-                    getconexion.CerrarConexion();
-                }
-
-
-                return res;
+                MySqlDataReader MyReader2 = comm.ExecuteReader();
 
             }
-            public string actualizarStockProducto(string idProducto, string stock)
+            catch (Exception e)
             {
-                //Boolean guardar = false;
-                string res = "";
-
-                try
-                {
-
-                    int stockAnterior =Convert.ToInt32(getStockProductoByidProd(idProducto));
-                    int stockActualizado = stockAnterior - Convert.ToInt32(stock);
-                    string consultinsert = "UPDATE  producto SET stock=@stock WHERE idProducto=@idProducto";
+                res = e.ToString();
+                getconexion.CerrarConexion();
+            }
+            finally
+            {
+                getconexion.CerrarConexion();
+            }
 
 
-                    MySqlCommand comm = new MySqlCommand(consultinsert, getconexion.getConexion());
-                    comm.Parameters.AddWithValue("@idProducto", idProducto);
-                    comm.Parameters.AddWithValue("@stock", stockActualizado);
+            return res;
+
+        }
+        public string actualizarStockProducto(string idProducto, string stock)
+        {
+            //Boolean guardar = false;
+            string res = "";
+
+            try
+            {
+
+                int stockAnterior = Convert.ToInt32(getStockProductoByidProd(idProducto));
+                int stockActualizado = stockAnterior - Convert.ToInt32(stock);
+                string consultinsert = "UPDATE  producto SET stock=@stock WHERE idProducto=@idProducto";
 
 
-                    MySqlDataReader MyReader2 = comm.ExecuteReader();
-
-                }
-                catch (Exception e)
-                {
-                    res = e.ToString();
-                    getconexion.CerrarConexion();
-                }
-                finally
-                {
-                    getconexion.CerrarConexion();
-                }
+                MySqlCommand comm = new MySqlCommand(consultinsert, getconexion.getConexion());
+                comm.Parameters.AddWithValue("@idProducto", idProducto);
+                comm.Parameters.AddWithValue("@stock", stockActualizado);
 
 
-                return res;
+                MySqlDataReader MyReader2 = comm.ExecuteReader();
 
             }
+            catch (Exception e)
+            {
+                res = e.ToString();
+                getconexion.CerrarConexion();
+            }
+            finally
+            {
+                getconexion.CerrarConexion();
+            }
+
+
+            return res;
+
+        }
 
         //##############################################
         //#########         MES       ##################
         //##############################################
-            public List<Producto> getALLProductosbyFechaMes(DateTime fecha)
+        public List<Producto> getALLProductosbyFechaMes(DateTime fecha)
+        {
+            MySqlDataReader rdr = null;
+            List<Producto> ListProductos = new List<Producto>();
+
+            string consulta = "SELECT fecha,idProducto,nombre,precioReal,stock,(precioReal*stock) as total,idCategoria FROM db.producto WHERE MONTH(fecha) =" + fecha.Month + " AND year(fecha)=" + fecha.Year;
+
+            MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
+            rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
             {
-                MySqlDataReader rdr = null;
-                List<Producto> ListProductos = new List<Producto>();
-
-                string consulta = "SELECT fecha,idProducto,nombre,precioReal,stock,(precioReal*stock) as total,idCategoria FROM db.producto WHERE MONTH(fecha) =" + fecha.Month + " AND year(fecha)=" + fecha.Year;
-
-                MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
-                rdr = cmd.ExecuteReader();
-
-                while (rdr.Read())
-                {
-                    ListProductos.Add(new Producto(rdr.GetDateTime(0), rdr.GetInt64(1).ToString(), rdr.GetString(2), rdr.GetString(3), 
-                        rdr.GetInt32(4).ToString(), rdr.GetInt32(5),rdr.GetInt32(6)));
-
-                }
-                getconexion.CerrarConexion();
-
-                return ListProductos;
+                ListProductos.Add(new Producto(rdr.GetDateTime(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3),
+                    rdr.GetInt32(4).ToString(), rdr.GetInt32(5), rdr.GetInt32(6)));
 
             }
+            getconexion.CerrarConexion();
+
+            return ListProductos;
+
+        }
 
 
 

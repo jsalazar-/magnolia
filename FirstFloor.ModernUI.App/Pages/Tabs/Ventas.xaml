@@ -70,7 +70,7 @@
         <Label x:Name="txt_4" Content="TOTAL" HorizontalAlignment="Left" Margin="19,238,0,0" VerticalAlignment="Top" FontSize="16" Width="60" Grid.Column="1" Grid.Row="1" Height="21"/>
         <Button x:Name="btnCancelarVenta" Content="Cancelar" Margin="14,0,10,0" VerticalAlignment="Top" Foreground="White" Background="#FFFF1744" FontSize="18" Grid.Column="1" Grid.Row="3" FontWeight="Bold"  Click="btnCancelarVenta_Click" HorizontalContentAlignment="Center"/>
         <Label x:Name="txt_5" Content="Código" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" Width="80" Grid.Row="1" Height="21"/>
-        <TextBox x:Name="txtcodProdVenta" Margin="68,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" TabIndex="5" Background="White" Grid.Row="1" MinWidth="120" MinHeight="23" Foreground="Black" TextChanged="codProdVenta_TextChanged"  PreviewTextInput="textbox_NumberValidationTextBox" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="250"/>
+        <TextBox x:Name="txtcodProdVenta" Margin="68,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" TabIndex="5" Background="White" Grid.Row="1" MinWidth="120" MinHeight="23" Foreground="Black" TextChanged="codProdVenta_TextChanged"   VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="250"/>
         <TextBox Name="TextBoxValue"
 					 PreviewTextInput="value_PreviewTextInput" TextChanged="value_TextChanged" PreviewKeyDown="value_PreviewKeyDown"					 
                      TextAlignment="Right" MaxWidth="0" Margin="327,10,103,0" KeyDown="TextBoxValue_KeyDown" Grid.Row="1" Background="White" Foreground="Black" VerticalContentAlignment="Center" VerticalAlignment="Top" MinWidth="50" MinHeight="23" />

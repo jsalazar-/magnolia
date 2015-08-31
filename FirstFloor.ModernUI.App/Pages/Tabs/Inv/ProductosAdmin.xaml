@@ -37,7 +37,7 @@
             <ComboBoxItem Content="Con Código" Background="#FF333333" Foreground="White" VerticalContentAlignment="Center"/>
         </ComboBox>
         <Label Content="Codigo Producto" Margin="10,54,0,0" VerticalAlignment="Top" FontSize="16" Grid.Row="1" HorizontalAlignment="Left" Height="21" Width="120"/>
-        <TextBox Name="txtcodprod" HorizontalAlignment="Left" Margin="13,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Background="White" Grid.Row="1" Grid.Column="1" Foreground="Black" BorderBrush="#FF333333" VerticalContentAlignment="Center" MinWidth="150" MinHeight="23" PreviewTextInput="textbox_NumberValidationTextBox" IsEnabled="False" Height="23"/>
+        <TextBox Name="txtcodprod" HorizontalAlignment="Left" Margin="13,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Background="White" Grid.Row="1" Grid.Column="1" Foreground="Black" BorderBrush="#FF333333" VerticalContentAlignment="Center" MinWidth="150" MinHeight="23"  IsEnabled="False" Height="23"/>
         <Label Content="Nombre" Margin="10,98,0,0" VerticalAlignment="Top" FontSize="16" Grid.Row="1" HorizontalAlignment="Left" Height="21" Width="58"/>
         <TextBox Name="txtnombreproducto" HorizontalAlignment="Left" Margin="13,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="14" Background="White" Grid.Row="1" Grid.Column="1" Foreground="Black" BorderBrush="#FF333333" VerticalContentAlignment="Center" MinWidth="150" MinHeight="23" Height="23"/>
         <Label Content="Categoría" Margin="10,135,0,0" FontSize="16" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="21" Width="68"/>

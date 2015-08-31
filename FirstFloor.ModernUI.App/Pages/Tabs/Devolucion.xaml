@@ -5,7 +5,7 @@
         WindowStartupLocation="CenterScreen"  ResizeMode="NoResize" WindowStyle="None">
     <Grid Background="#FF333333" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
         <Label Content="Id Producto" HorizontalAlignment="Left" Margin="228,85,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox Name="txtidventa" HorizontalAlignment="Left" Height="23" Margin="66,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95"  PreviewTextInput="textbox_NumberValidationTextBox" TextChanged="codProdVenta_TextChanged" Background="White" Foreground="Black" MinWidth="150" MinHeight="23" VerticalContentAlignment="Center" />
+        <TextBox Name="txtidventa" HorizontalAlignment="Left" Height="23" Margin="66,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95"   TextChanged="codProdVenta_TextChanged" Background="White" Foreground="Black" MinWidth="150" MinHeight="23" VerticalContentAlignment="Center" />
         <Button Content="Cambiar" HorizontalAlignment="Left" Margin="488,400,0,0" VerticalAlignment="Top" Width="140" Height="34" Click="Button_Click" Foreground="White" Background="#FF009688" FontWeight="Bold" FontSize="14"/>
         <Button Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="152,400,0,0" VerticalAlignment="Top" Width="140" Height="34" Click="btnCancelar_Click" Background="#FFFF1744" Foreground="White" FontWeight="Bold" FontSize="14"/>
         <DataGrid x:Name="datagridVentas"
@@ -50,7 +50,7 @@
         <Label Name="ltotal" Content="0" HorizontalAlignment="Left" Margin="530,371,0,0" VerticalAlignment="Top" Width="74"/>
         <DatePicker Name="fechaventa" HorizontalAlignment="Left" Margin="516,77,0,0" VerticalAlignment="Top" Width="112" Background="White" Foreground="Black" MinWidth="150" MinHeight="23" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
         <Label Content="Fecha" HorizontalAlignment="Left" Margin="470,85,0,0" VerticalAlignment="Top" Width="50" FontSize="14"/>
-        <TextBox Name="txtidProducto" HorizontalAlignment="Left" Height="23" Margin="305,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged" PreviewTextInput="textbox_NumberValidationTextBox" Background="White" Foreground="Black" MinWidth="150" MinHeight="23" VerticalContentAlignment="Center"/>
+        <TextBox Name="txtidProducto" HorizontalAlignment="Left" Height="23" Margin="305,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"  Background="White" Foreground="Black" MinWidth="150" MinHeight="23" VerticalContentAlignment="Center"/>
         <Label Content="Id Venta" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Button Name="btnBuscarVenta" Content="Buscar" HorizontalAlignment="Left" Margin="516,109,0,0" VerticalAlignment="Top" Click="btnBuscarVenta_Click" Foreground="White" FontWeight="Bold" Background="#FF009688"/>
         <Button x:Name="btnDevolver" Content="Devolver" HorizontalAlignment="Left" Margin="324,400,0,0" VerticalAlignment="Top" Width="140" Height="34" Click="btnDevolver_Click" Background="#FFFFD740" Foreground="White" FontWeight="Bold" FontSize="14" />

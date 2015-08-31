@@ -76,11 +76,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
             return cventas;
         }
 
-        private void textbox_NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
+    
         private void codProdVenta_TextChanged(object sender, TextChangedEventArgs e)
         {
             
@@ -115,94 +111,59 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
             if (txtidventa.Text.Equals(""))
             {
                 MessageBox.Show("Ingresar idventa", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }else if(txtidProducto.Text.Equals(""))
+            }
+            else if (txtidProducto.Text.Equals(""))
             {
                 MessageBox.Show("Ingresar idProducto", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }else if(fechaventa.Text.Equals(""))
+            }
+            else if (fechaventa.Text.Equals(""))
             {
                 MessageBox.Show("Ingresar Fecha", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }else{
+            }
+            else
+            {
 
 
                 ventasFacade ventFac = new ventasFacade();
-                List<MVentas> listaVentaDevolucion = ventFac.getVentasForDevolucion(Convert.ToDouble(txtidventa.Text),txtidProducto.Text,Convert.ToDateTime(fechaventa.Text));
+                List<MVentas> listaVentaDevolucion = ventFac.getVentasForDevolucion(Convert.ToDouble(txtidventa.Text), txtidProducto.Text, Convert.ToDateTime(fechaventa.Text));
                 var rows = GetDataGridRows(datagridVentas);
-                
-
-                //if (datagridVentas.Items.Count == 0)
-                //{
-                    /*bool esta = false;
-                    foreach (DataGridRow r in rows)
+                if (listaVentaDevolucion.Count != 0)
+                {
+                    venta.Clear();
+                    datagridVentas.ItemsSource = venta;
+                    //llenar datagridVenta para devoulcion
+                    foreach (var item in listaVentaDevolucion)
                     {
-                        VentaTemporal rv = (VentaTemporal)r.Item;
-                        if (txtidventa.Text.Equals(Convert.ToString(rv.idVenta)))
-                        {
-                            esta = true;
+                        ProductoFacade prodFobtener = new ProductoFacade();
+                        Producto Prod = new Producto();
+                        Prod = prodFobtener.getProductosByID(item.idProducto);
+                        vtemp = new VentaTemporal(item.idVenta, item.idProducto, Prod.nombre, Prod.precio, item.cantidad.ToString(), "1", item.total.ToString());
+                        venta.Add(vtemp);
+                        cantidad = cantidad + 1;
+                        total = total + Convert.ToInt32(item.total);
 
-                        }
-
-
+                        //ltotal.Content = Prod.precio;
+                        ltotal.Content = item.total;
+                        TextBoxValue.Text = item.cantidad.ToString();
                     }
+                    datagridVentas.ItemsSource = venta;
+                }
+                else
+                {
+                    MessageBox.Show("No se han encontrado ventas con estos datos.", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
 
-                    if (!esta)
-                    {*/
-                        if (listaVentaDevolucion.Count != 0)
-                        {
-                            venta.Clear();
-                            datagridVentas.ItemsSource = venta;
-                            //llenar datagridVenta para devoulcion
-                            foreach (var item in listaVentaDevolucion)
-                            {
-                                ProductoFacade prodFobtener = new ProductoFacade();
-                                Producto Prod = new Producto();
-                                Prod = prodFobtener.getProductosByID(item.idProducto);
-                                vtemp = new VentaTemporal(item.idVenta, item.idProducto, Prod.nombre, Prod.precio, item.cantidad.ToString(),"1", item.total.ToString());
-                                venta.Add(vtemp);
-                                cantidad = cantidad + 1;
-                                total = total + Convert.ToInt32(item.total);
-                                
-                                ltotal.Content = Prod.precio;
-                            }
-                            datagridVentas.ItemsSource = venta;
-                        }
-                        else
-                        {
-                            MessageBox.Show("No se han encontrado ventas con estos datos.", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-
-                    //}
-                //}
-                //else
-                //{
-                //    if (listaVentaDevolucion.Count > 0)
-                //    {
-                //        //llenar datagridVenta para devoulcion
-                //        foreach (var item in listaVentaDevolucion)
-                //        {
-                //            ProductoFacade prodFobtener = new ProductoFacade();
-                //            Producto Prod = new Producto();
-                //            Prod = prodFobtener.getProductosByID(item.idProducto);
-                //            VentaTemporal vtemp = new VentaTemporal(item.idVenta, item.idProducto, Prod.nombre, Prod.precio, item.cantidad.ToString(), item.total.ToString());
-                //            venta.Add(vtemp);
-                //            cantidad = cantidad + 1;
-                //            total = total + item.total;
-                //            lcantidad.Content = cantidad.ToString();
-                //            ltotal.Content = total.ToString();
-
-                //        }
-                //        datagridVentas.ItemsSource = venta;
-
-                //    }
-                //    else
-                //    {
-                //        MessageBox.Show("No se han encontrado ventas con estos datos.");
-                //    }
-
-                //}
-            
             }
-        
+
         }
+
+        private void textbox_NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+
 
 
 

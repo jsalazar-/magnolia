@@ -34,8 +34,8 @@ namespace FirstFloor.ModernUI.App.Modelo
             this.idCategoria = idCategoria;
 
         }
-        
-        public MVentas(DateTime fecha,string idProducto,string nombre, int cantidad, double total,int idCategoria)
+
+        public MVentas(DateTime fecha, string idProducto, string nombre, int cantidad, double total, int idCategoria)
         {
             this.fecha = fecha;
             this.idProducto = idProducto;
@@ -46,7 +46,8 @@ namespace FirstFloor.ModernUI.App.Modelo
 
         }
 
-        public MVentas(Int64 idVenta, string idProducto, string rutCliente, string rutVendedor,int cantidad, double total,DateTime fecha,string tipoVenta) {
+        public MVentas(Int64 idVenta, string idProducto, string rutCliente, string rutVendedor, int cantidad, double total, DateTime fecha, string tipoVenta)
+        {
             this.idVenta = idVenta;
             this.idProducto = idProducto;
             this.rutCliente = rutCliente;
@@ -56,6 +57,6 @@ namespace FirstFloor.ModernUI.App.Modelo
             this.fecha = fecha;
             this.tipoVenta = tipoVenta;
         }
-        
+
     }
 }

@@ -225,8 +225,29 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                 if (Convert.ToInt32(txtdescuento.Text) == 0)
                 {
 
-                    txttotal.Text = (Convert.ToInt32(txtsubtotal.Text)).ToString();
-                    //txtDiferencia.Text = (Convert.ToInt32(txtsubtotal.Text) - dineroDevolucion).ToString();
+                    /********************************************************/
+                    int mtotalDevo = subtotal - dineroDevolucion;
+                    if (mtotalDevo < 0)
+                    {
+                        //Quiere decir que totaldevolucion tiene saldo 
+                        txtDiferencia.Text = (mtotalDevo * -1).ToString();
+                        mtotalDevo = 0;
+
+                    }
+                    else
+
+                    {
+                        txttotal.Text = "0";
+                        txtDiferencia.Text = "0";
+                    }
+
+                    if (mtotalDevo < 0)
+                    {
+                        mtotalDevo = mtotalDevo * -1;
+                    }
+                    txtsubtotal.Text = mtotalDevo.ToString();
+                    txttotal.Text = mtotalDevo.ToString();
+                    /********************************************************/
 
                 }
                 else
@@ -283,9 +304,10 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                             if (Value <= maxstock)
                             {
                                 int total = Convert.ToInt32(Prod.precio) * Convert.ToInt32(Value);
-                                //MessageBox.Show("precio:"+Prod.precio.ToString());
                                 vtemporal[filaProd].cantidad = Value.ToString();
                                 vtemporal[filaProd].total = total.ToString();
+
+
 
                                 datagridVentas.ItemsSource = null;
                                 datagridVentas.ItemsSource = vtemporal;
@@ -300,34 +322,72 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                         }
                     }
                 }
-                //Recorrer tabla para sumar total
-                /*  subtotal = 0;
-
-                  foreach (var i in venta)
-                  {
-                      subtotal = subtotal + Convert.ToInt32(i.total);
-                      //MessageBox.Show(i.total.ToString());
-                  }
-                  txtsubtotal.Text = subtotal.ToString*/
-                //Recorrer tabla para sumar total
                 subtotal = 0;
                 int numProducto = 0;
                 foreach (var i in venta)
                 {
                     subtotal = subtotal + Convert.ToInt32(i.total);
-                    //MessageBox.Show(i.total.ToString());
+
                     numProducto = numProducto + 1;
                 }
-                txtsubtotal.Text = subtotal.ToString();
+
                 txtCantidadProductos.Content = numProducto.ToString();
+
                 if (Convert.ToInt32(txtdescuento.Text) == 0)
                 {
-                    txttotal.Text = txtsubtotal.Text;
+                    /********************************************************/
+                    int mtotalDevo = subtotal - dineroDevolucion;
+                    if (mtotalDevo < 0)
+                    {
+                        //Quiere decir que totaldevolucion tiene saldo 
+                        txtDiferencia.Text = (mtotalDevo * -1).ToString();
+                        mtotalDevo = 0;
+
+                    }
+                    else
+
+                    {
+                        txttotal.Text = "0";
+                        txtDiferencia.Text = "0";
+                    }
+
+                    if (mtotalDevo < 0)
+                    {
+                        mtotalDevo = mtotalDevo * -1;
+                    }
+                    txtsubtotal.Text = mtotalDevo.ToString();
+                    txttotal.Text = mtotalDevo.ToString();
+                    /********************************************************/
+
+                    //txttotal.Text = txtsubtotal.Text;
+
                 }
                 else
                 {
                     double des = Convert.ToDouble(txtdescuento.Text) / Convert.ToInt32(100);
-                    txttotal.Text = (Convert.ToInt32(txtsubtotal.Text) - Convert.ToDouble(txtsubtotal.Text) * des).ToString();
+                    /********************************************************/
+                    int mtotalDevo = subtotal - dineroDevolucion;
+                    if (mtotalDevo < 0)
+                    {
+                        //Quiere decir que totaldevolucion tiene saldo 
+                        txtDiferencia.Text = (mtotalDevo * -1).ToString();
+                        mtotalDevo = 0;
+
+                    }
+                    else
+
+                    {
+                        txttotal.Text = "0";
+                        txtDiferencia.Text = "0";
+                    }
+
+                    if (mtotalDevo < 0)
+                    {
+                        mtotalDevo = mtotalDevo * -1;
+                    }
+                    txtsubtotal.Text = mtotalDevo.ToString();
+                    txttotal.Text = (mtotalDevo - mtotalDevo * des).ToString();
+                    /********************************************************/
                 }
                 RaiseEvent(new RoutedEventArgs(IncreaseClickedEvent));
             }
@@ -374,6 +434,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                             int total = Convert.ToInt32(Prod.precio) * Convert.ToInt32(Value);
                             vtemporal[filaProd].cantidad = Value.ToString();
                             vtemporal[filaProd].total = total.ToString();
+                            txttotal.Text = (Convert.ToDouble(txttotal.Text) - dineroDevolucion).ToString();
 
                             datagridVentas.ItemsSource = null;
                             datagridVentas.ItemsSource = vtemporal;
@@ -403,12 +464,59 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                 txtCantidadProductos.Content = numProducto.ToString();
                 if (Convert.ToInt32(txtdescuento.Text) == 0)
                 {
-                    txttotal.Text = txtsubtotal.Text;
+                    /********************************************************/
+                    //En proceso de cambio, al presionar spinbox decre al total se descuenta el valor de cambio
+                    int mtotalDevo = subtotal - dineroDevolucion;
+                    if (mtotalDevo < 0)
+                    {
+                        //Quiere decir que totaldevolucion tiene saldo 
+                        txtDiferencia.Text = (mtotalDevo * -1).ToString();
+                        mtotalDevo = 0;
+
+                    }
+                    else
+
+                    {
+                        txttotal.Text = "0";
+                        txtDiferencia.Text = "0";
+                    }
+
+                    if (mtotalDevo < 0)
+                    {
+                        mtotalDevo = mtotalDevo * -1;
+                    }
+                    txtsubtotal.Text = mtotalDevo.ToString();
+                    txttotal.Text = mtotalDevo.ToString();
+                    /********************************************************/
+
                 }
                 else
                 {
                     double des = Convert.ToDouble(txtdescuento.Text) / Convert.ToInt32(100);
-                    txttotal.Text = (Convert.ToInt32(txtsubtotal.Text) - Convert.ToDouble(txtsubtotal.Text) * des).ToString();
+                    /********************************************************/
+                    int mtotalDevo = subtotal - dineroDevolucion;
+                    if (mtotalDevo < 0)
+                    {
+                        //Quiere decir que totaldevolucion tiene saldo 
+                        txtDiferencia.Text = (mtotalDevo * -1).ToString();
+                        mtotalDevo = 0;
+
+                    }
+                    else
+
+                    {
+                        txttotal.Text = "0";
+                        txtDiferencia.Text = "0";
+                    }
+
+                    if (mtotalDevo < 0)
+                    {
+                        mtotalDevo = mtotalDevo * -1;
+                    }
+                    txtsubtotal.Text = mtotalDevo.ToString();
+                    txttotal.Text = (mtotalDevo - mtotalDevo * des).ToString();
+                    /********************************************************/
+                    //                    txttotal.Text = (Convert.ToInt32(txtsubtotal.Text) - Convert.ToDouble(txtsubtotal.Text) * des).ToString();
                 }
                 RaiseEvent(new RoutedEventArgs(DecreaseClickedEvent));
             }
@@ -687,39 +795,20 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
             if (mtotalDevo < 0)
             {
                 //Quiere decir que totaldevolucion tiene saldo 
-                MessageBox.Show(mtotalDevo.ToString());
-                /*if (mtotalDevo*-1 > Convert.ToInt32(txtTotaldevolucion.Text) || mtotalDevo*-1 == Convert.ToInt32(txtTotaldevolucion.Text))
-                {
-                    txtDiferencia.Text = mtotalDevo.ToString();
-                }
-                else if (mtotalDevo * -1 > Convert.ToInt32(txtTotaldevolucion.Text) )
-                {
-                    txtDiferencia.Text = "0";
-                }*/
                 txtDiferencia.Text = (mtotalDevo * -1).ToString();
                 mtotalDevo = 0;
 
             }
             else
-            {
 
-                //txtDiferencia.Text = mtotalDevo.ToString();
-                /*if (mtotalDevo <= Convert.ToInt32(txtTotaldevolucion.Text) )
-               {
-                   txtDiferencia.Text = mtotalDevo.ToString();
-               }
-               else if (mtotalDevo  > Convert.ToInt32(txtTotaldevolucion.Text) )
-               {*/
+            {
                 txtDiferencia.Text = "0";
-                //}
             }
 
             if (mtotalDevo < 0)
             {
                 mtotalDevo = mtotalDevo * -1;
             }
-
-            //txtsubtotal.Text = subtotal.ToString();
             txtsubtotal.Text = mtotalDevo.ToString();
 
 
@@ -838,7 +927,26 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
         }
         private void btnCancelarVenta_Click(object sender, RoutedEventArgs e)
         {
-            limpiarRegistroVentas();
+            if (!string.IsNullOrEmpty(ventaTemp.idProducto))
+            {
+                if (MessageBox.Show("Hay un proceso de cambio de producto.¿Esta seguro de cancelar operación?", "Cambiar Vendedor", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    limpiarRegistroVentas();
+                    btnPagar.Content = "Pagar";
+                    ventaTemp = new VentaTemporal();
+                    ltotalDevolucion.Visibility = Visibility.Hidden;
+                    txtTotaldevolucion.Visibility = Visibility.Hidden;
+                    lDiferencia.Visibility = Visibility.Hidden;
+                    txtDiferencia.Visibility = Visibility.Hidden;
+                    dineroDevolucion = 0;
+                }
+            }
+            else
+            {
+                limpiarRegistroVentas();
+            }
+
+
         }
 
         private void btnPagar_Click(object sender, RoutedEventArgs e)
@@ -1051,7 +1159,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                         if (!rutcliente.Equals(""))
                         {
                             //actualizar deuda y total de compras 
-                            MessageBox.Show("guardar usuario a fiar", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            //MessageBox.Show("Guardar usuario a fiar", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Warning);
                             //Agregar registo a cliente de ventas 
                             //actualizar deuda y total de compras
                             clienteFacade clienteFac = new clienteFacade();
@@ -1398,7 +1506,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                             }
                             else
                             {
-                                MessageBox.Show("Erro al actualizar registro cliente:" + rActu + "", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show("Error al actualizar registro cliente:" + rActu + "", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
 
 
@@ -1440,7 +1548,11 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
             txtEntregado.Text = "0";
             txtVuelto.Text = "0";
             //txtTotaldevolucion.Text = "0";
+            txtEntregado.Text = "0";
             txtDiferencia.Text = "0";
+
+
+
         }
 
         private void datagridVentas_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1528,6 +1640,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
         //################           VALIDACION       ##################
         //############################################################
 
+
         private void textbox_NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
@@ -1610,9 +1723,29 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
         {
             try
             {
-                Devolucion dev = new Devolucion();
-                dev.setInstancia(this);
-                dev.Show();
+                if (!string.IsNullOrEmpty(ventaTemp.idProducto))
+                {
+                    if (MessageBox.Show("Hay un proceso de cambio de producto.¿Esta seguro de cancelar operación?", "Cambiar Vendedor", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+                        limpiarRegistroVentas();
+                        btnPagar.Content = "Pagar";
+                        ventaTemp = new VentaTemporal();
+                        ltotalDevolucion.Visibility = Visibility.Hidden;
+                        txtTotaldevolucion.Visibility = Visibility.Hidden;
+                        lDiferencia.Visibility = Visibility.Hidden;
+                        txtDiferencia.Visibility = Visibility.Hidden;
+                        dineroDevolucion = 0;
+                        Devolucion dev = new Devolucion();
+                        dev.setInstancia(this);
+                        dev.Show();
+                    }
+                }
+                else
+                {
+                    Devolucion dev = new Devolucion();
+                    dev.setInstancia(this);
+                    dev.Show();
+                }
 
             }
             catch (Exception ex)

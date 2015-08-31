@@ -237,61 +237,24 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
                                             }
                                             else
                                             {
-                                                //Producto ya tiene productos asociados a categoria agregar en la ultima posicion
-                                                if (listProducto.Count > 0)
-                                                {
-                                                    //string mayoridProd = prodFCod.getMayorIdProdbyNombCat(nombreCat);
-                                                    //if (idPnuevo.Length > 0)
-                                                    //{
-                                                    //val = Int64.Parse(idPnuevo);
-                                                    //}
-                                                    //long idCodSum = Int64.Parse(mayoridProd);
-                                                    //idCodSum += 1;
-                                                    //string idProductoSuma = idCodSum.ToString();
-                                                    //Guardar producto con idproducto +1
-                                                    DateTime fechaactual = DateTime.Now.Date;
-                                                    string res = prodF.GuardarProducto(txtcodprod.Text, nombreProd, stock, precioReal, precio, nombreCat, fechaactual, 1);
-                                                    if (res.Equals(""))
-                                                    {
-                                                        MessageBox.Show("Producto guardado correctamente!", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Information);
-                                                        limpiarTxtProducto();
-                                                        llenarTablaProductoBynombreCat(nombreCat);
-                                                        cbTipoCodigo.SelectedIndex = 0;
-                                                        tabCodigos.actualizarArbolyTablaProductos();
-                                                        //llenarTablaProductoCodBarra();
-                                                        //CantidadTotalRubrosyProductos();
-                                                    }
-                                                    else
-                                                    {
-                                                        MessageBox.Show("Error al guardar producto:" + res + "", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                                                    }
+                                                DateTime fechaactual = DateTime.Now.Date;
+                                                string res = prodF.GuardarProducto(txtcodprod.Text, nombreProd, stock, precioReal, precio, nombreCat, fechaactual, 1);
+                                                if (res.Equals(""))
+                                                {
+                                                    MessageBox.Show("Producto guardado correctamente!", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                    limpiarTxtProducto();
+                                                    llenarTablaProductoBynombreCat(nombreCat);
+                                                    cbTipoCodigo.SelectedIndex = 0;
+                                                    tabCodigos.actualizarArbolyTablaProductos();
                                                 }
                                                 else
                                                 {
-                                                    //Primer producto asociado a categoria
-                                                    //string idCategoria = catFCod.getCategoriaByNombre(nombreCat);
-                                                    //conformar idproducto con categoria
-                                                    //idPnuevo += idCategoria + "000001";
+                                                    MessageBox.Show("Error al guardar producto:" + res + "", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                                                    DateTime fechaactual = DateTime.Now.Date;
-
-                                                    string res = prodF.GuardarProducto(txtcodprod.Text, nombreProd, stock, precioReal, precio, nombreCat, fechaactual, 1);
-
-                                                    if (res.Equals(""))
-                                                    {
-                                                        MessageBox.Show("Producto guardado correctamente!", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Information);
-                                                        limpiarTxtProducto();
-                                                        llenarTablaProductoBynombreCat(nombreCat);
-                                                        cbTipoCodigo.SelectedIndex = 0;
-                                                        tabCodigos.actualizarArbolyTablaProductos();
-                                                    }
-                                                    else
-                                                    {
-                                                        MessageBox.Show("Error al guardar producto:" + res + "", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                                                    }
                                                 }
+
+
 
 
 
@@ -327,7 +290,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
                                     for (int i = 0; i < a.Length; i++)
                                     {
                                         if (Char.IsDigit(a[i]))
-                                            if (idPnuevo.Length < 5)
+                                            if (idPnuevo.Length < 8)
                                             {
                                                 idPnuevo += a[i];
                                             }
@@ -340,7 +303,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
                                     {
                                         ProductoFacade prodF = new ProductoFacade();
 
-                                        string codProd = txtcodprod.Text;
+
                                         string nombreProd = txtnombreproducto.Text;
                                         string nombreCat = cbCategoria.SelectedValue.ToString();
                                         string stock = txtstock.Text;
@@ -363,60 +326,25 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
                                         else
                                         {
                                             //Producto ya tiene productos asociados a categoria agregar en la ultima posicion
-                                            if (listProducto.Count > 0)
-                                            {
-                                                string mayoridProd = prodFCod.getMayorIdProdbyNombCat(nombreCat);
-                                                //if (idPnuevo.Length > 0)
-                                                //{
-                                                //val = Int64.Parse(idPnuevo);
-                                                //}
-                                                long idCodSum = Int64.Parse(mayoridProd);
-                                                idCodSum += 1;
-                                                string idProductoSuma = idCodSum.ToString();
-                                                //Guardar producto con idproducto +1
-                                                DateTime fechaactual = DateTime.Now.Date;
-                                                string res = prodF.GuardarProducto(idProductoSuma, nombreProd, stock, precioReal, precio, nombreCat, fechaactual, 0);
-                                                if (res.Equals(""))
-                                                {
-                                                    MessageBox.Show("Producto guardado correctamente!", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Information);
-                                                    limpiarTxtProducto();
-                                                    llenarTablaProductoBynombreCat(nombreCat);
-                                                    tabCodigos.actualizarArbolyTablaProductos();
-                                                    //llenarTablaProductoCodBarra();
-                                                    //CantidadTotalRubrosyProductos();
-                                                }
-                                                else
-                                                {
-                                                    MessageBox.Show("Error al guardar producto:" + res + "", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                                                }
+
+                                            //Guardar producto con idproducto 
+                                            DateTime fechaactual = DateTime.Now.Date;
+                                            string res = prodF.GuardarProducto(idPnuevo, nombreProd, stock, precioReal, precio, nombreCat, fechaactual, 0);
+                                            if (res.Equals(""))
+                                            {
+                                                MessageBox.Show("Producto guardado correctamente!", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Information);
+                                                limpiarTxtProducto();
+                                                llenarTablaProductoBynombreCat(nombreCat);
+                                                tabCodigos.actualizarArbolyTablaProductos();
+                                                //llenarTablaProductoCodBarra();
+                                                //CantidadTotalRubrosyProductos();
                                             }
                                             else
                                             {
-                                                //Primer producto asociado a categoria
-                                                string idCategoria = catFCod.getCategoriaByNombre(nombreCat);
-                                                //conformar idproducto con categoria
-                                                idPnuevo += idCategoria + "000001";
+                                                MessageBox.Show("Error al guardar producto:" + res + "", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                                                DateTime fechaactual = DateTime.Now.Date;
-
-                                                string res = prodF.GuardarProducto(idPnuevo, nombreProd, stock, precioReal, precio, nombreCat, fechaactual, 0);
-
-                                                if (res.Equals(""))
-                                                {
-                                                    MessageBox.Show("Producto guardado correctamente!", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Information);
-                                                    limpiarTxtProducto();
-                                                    llenarTablaProductoBynombreCat(nombreCat);
-                                                    tabCodigos.actualizarArbolyTablaProductos();
-                                                }
-                                                else
-                                                {
-                                                    MessageBox.Show("Error al guardar producto:" + res + "", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                                                }
                                             }
-
-
 
 
                                         }
@@ -535,116 +463,27 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
                                     //verificar si cod es generado o ingresado por usuario
                                     int generado = prodF.getIdGenerado(txtcodprod.Text);
                                     DateTime fechaactual = DateTime.Now.Date;
-                                    if (generado == 0)
+
+                                    //actualizar con id que habia ingresado el usuario
+                                    string res = prodF.ActualizarProducto(txtcodprod.Text, txtcodprod.Text, nombreProd, stock, precioReal, precio, nombreCat, fechaactual);
+                                    if (res.Equals(""))
                                     {
-
-
-
-                                        //al actualizar verificar que idproducto sea cambiado, verificar si en nueva categoria ya hay productos, sino
-                                        //crear un nuevo id producto asociado a categoria.Si ya existen producto asociados a categoria obtener ese idproducto y sumar +1 a idproducto
-                                        int totalProdinCat = prodFCod.getTotalProductosBynombreCat(nombreCat);
-
-                                        if (totalProdinCat < 0)
-                                        {//crear un nuevo id producto asociado a categoria
-
-                                            Guid guid = Guid.NewGuid();
-                                            string a = guid.ToString();
-
-                                            string idPnuevo = string.Empty;
-                                            long val = 0;
-
-                                            for (int i = 0; i < a.Length; i++)
-                                            {
-                                                if (Char.IsDigit(a[i]))
-                                                    if (idPnuevo.Length < 5)
-                                                    {
-                                                        idPnuevo += a[i];
-                                                    }
-                                                    else
-                                                    {
-                                                        break;
-                                                    }
-                                            }
-                                            string idCategoria = catFCod.getCategoriaByNombre(nombreCat);
-                                            idPnuevo += idCategoria + "000001";
-
-                                            string res = prodF.ActualizarProducto(txtcodprod.Text, idPnuevo, nombreProd, stock, precioReal, precio, nombreCat, fechaactual);
-                                            if (res.Equals(""))
-                                            {
-                                                MessageBox.Show("Producto actualizado correctamente!", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Information);
-                                                limpiarTxtProducto();
-                                                btnGuardarProducto.Visibility = Visibility.Visible;
-                                                btncancelarEditarProd.Visibility = Visibility.Hidden;
-                                                btnGuardarActualizarProducto.Visibility = Visibility.Hidden;
-                                                llenarTablaProductoBynombreCat(nombreCat);
-                                                cbTipoCodigo.IsEnabled = true;
-                                                tabCodigos.actualizarArbolyTablaProductos();
-                                            }
-                                            else
-                                            {
-                                                MessageBox.Show("Error al actualizar producto:" + res + "", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                                            }
-
-                                        }
-                                        else
-                                        {//Si ya existen producto asociados a categoria obtener ese idproducto y sumar +1 a idproducto
-
-
-                                            string mayoridProd = prodFCod.getMayorIdProdbyNombCat(nombreCat);
-                                            /*if (idPnuevo.Length > 0)
-                                             {
-                                                val = Int64.Parse(idPnuevo);
-                                             }*/
-                                            long idCodSum = Int64.Parse(mayoridProd);
-                                            idCodSum += 1;
-                                            string idProductoSuma = idCodSum.ToString();
-                                            //Guardar producto con idproducto +1
-                                            //DateTime fechaactual = DateTime.Now.Date;
-                                            //string res = prodF.GuardarProducto(idProductoSuma, nombreProd, stock, precioReal, precio, nombreCat, fechaactual);
-
-                                            string res = prodF.ActualizarProducto(txtcodprod.Text, idProductoSuma, nombreProd, stock, precioReal, precio, nombreCat, fechaactual);
-                                            if (res.Equals(""))
-                                            {
-                                                MessageBox.Show("Producto actualizado correctamente!", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Information);
-                                                limpiarTxtProducto();
-                                                btnGuardarProducto.Visibility = Visibility.Visible;
-                                                btncancelarEditarProd.Visibility = Visibility.Hidden;
-                                                btnGuardarActualizarProducto.Visibility = Visibility.Hidden;
-                                                llenarTablaProductoBynombreCat(nombreCat);
-                                                cbTipoCodigo.IsEnabled = true;
-                                                tabCodigos.actualizarArbolyTablaProductos();
-                                            }
-                                            else
-                                            {
-                                                MessageBox.Show("Error al actualizar producto:" + res + "", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                                            }
-
-                                        }
+                                        MessageBox.Show("Producto actualizado correctamente!", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Information);
+                                        limpiarTxtProducto();
+                                        btnGuardarProducto.Visibility = Visibility.Visible;
+                                        btncancelarEditarProd.Visibility = Visibility.Hidden;
+                                        btnGuardarActualizarProducto.Visibility = Visibility.Hidden;
+                                        llenarTablaProductoBynombreCat(nombreCat);
+                                        cbTipoCodigo.IsEnabled = true;
+                                        tabCodigos.actualizarArbolyTablaProductos();
                                     }
                                     else
                                     {
-                                        //actualizar con id que habia ingresado el usuario
-                                        string res = prodF.ActualizarProducto(txtcodprod.Text, txtcodprod.Text, nombreProd, stock, precioReal, precio, nombreCat, fechaactual);
-                                        if (res.Equals(""))
-                                        {
-                                            MessageBox.Show("Producto actualizado correctamente!", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Information);
-                                            limpiarTxtProducto();
-                                            btnGuardarProducto.Visibility = Visibility.Visible;
-                                            btncancelarEditarProd.Visibility = Visibility.Hidden;
-                                            btnGuardarActualizarProducto.Visibility = Visibility.Hidden;
-                                            llenarTablaProductoBynombreCat(nombreCat);
-                                            cbTipoCodigo.IsEnabled = true;
-                                            tabCodigos.actualizarArbolyTablaProductos();
-                                        }
-                                        else
-                                        {
-                                            MessageBox.Show("Error al actualizar producto:" + res + "", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                                        }
+                                        MessageBox.Show("Error al actualizar producto:" + res + "", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Error);
 
                                     }
+
+
                                 }
                                 else
                                 {

@@ -63,7 +63,7 @@
                         <RowDefinition Height="84*"/>
                     </Grid.RowDefinitions>
                     <Label x:Name="txt_5" Content="Código" HorizontalAlignment="Left" Margin="5,31,0,0" VerticalAlignment="Top" FontSize="16" Width="80" Height="21" Grid.Row="1" Foreground="#FF424242"/>
-                    <TextBox x:Name="txtCodigoToImprimir" Height="25" Margin="85,31,368,0" TextWrapping="Wrap" VerticalAlignment="Top" TabIndex="5" Background="White" MinWidth="120" MinHeight="23" Foreground="Black" Grid.Row="1" PreviewTextInput="textbox_NumberValidationTextBox" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="txtCodigoToImprimir" Height="25" Margin="85,31,368,0" TextWrapping="Wrap" VerticalAlignment="Top" TabIndex="5" Background="White" MinWidth="120" MinHeight="23" Foreground="Black" Grid.Row="1"  VerticalContentAlignment="Center"/>
                     <Label x:Name="txt_5_Copy" Content="Tipo barra" HorizontalAlignment="Left" Margin="5,71,0,0" VerticalAlignment="Top" FontSize="16" Width="80" Height="21" Grid.Row="1" Foreground="#FF424242"/>
                     <Label x:Name="txt_5_Copy2" Content="Texto superior" HorizontalAlignment="Left" Margin="5,113,0,0" VerticalAlignment="Top" Height="21" FontSize="14" Grid.Row="1" Foreground="#FF424242"/>
                     <TextBox x:Name="txtSobreBarra" Height="23" Margin="116,111,694,0" TextWrapping="Wrap" VerticalAlignment="Top" TabIndex="5" Background="White" MinWidth="120" MinHeight="23" Foreground="Black" Grid.Row="1"/>

@@ -211,7 +211,7 @@ namespace FirstFloor.ModernUI.App.Pages.Users
             string rut = txtrut.Text;
             string nombre = txtNombre.Text;
             string descuento = txtDescuento.Text;
-            double deuda = Convert.ToDouble(txtDeuda.Text);
+
             clienteFacade cl = new clienteFacade();
             if (string.IsNullOrWhiteSpace(txtrut.Text))
             {
@@ -252,7 +252,7 @@ namespace FirstFloor.ModernUI.App.Pages.Users
 
 
                                 string res = "";
-
+                                double deuda = Convert.ToDouble(txtDeuda.Text);
                                 clienteFacade clienteF = new clienteFacade();
                                 res = clienteF.actualizarCliente(rut, nombre, descuento, deuda);
 
@@ -283,7 +283,7 @@ namespace FirstFloor.ModernUI.App.Pages.Users
                         else
                         {
                             string res = "";
-
+                            double deuda = Convert.ToDouble(txtDeuda.Text);
                             clienteFacade clienteF = new clienteFacade();
                             res = clienteF.actualizarCliente(rut, nombre, descuento, deuda);
 

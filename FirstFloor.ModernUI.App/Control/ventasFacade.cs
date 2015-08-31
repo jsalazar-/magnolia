@@ -74,8 +74,8 @@ namespace FirstFloor.ModernUI.App.Control
 
 
 
-                
-                
+
+
                 getconexion.CerrarConexion();
 
                 //guardar = true;
@@ -110,21 +110,21 @@ namespace FirstFloor.ModernUI.App.Control
             {
                 total = 1;
             }
-            
+
             else if (vt.getVentastotales() > 1)
             {
                 while (rdr.Read())
                 {
-                    if(rdr.GetInt64(0)>mayor)
+                    if (rdr.GetInt64(0) > mayor)
                     {
-                        mayor=rdr.GetInt32(0);
+                        mayor = rdr.GetInt32(0);
                     }
                 }
 
             }
             total = mayor;
 
-            
+
             getconexion.CerrarConexion();
 
             return total;
@@ -157,7 +157,7 @@ namespace FirstFloor.ModernUI.App.Control
             MySqlDataReader rdr = null;
             List<MVentas> Listventas = new List<MVentas>();
 
-            string consulta = "SELECT*FROM venta WHERE YEAR(fecha)="+fecha.Year+" AND MONTH(fecha)="+fecha.Month+" AND DAY(fecha)="+fecha.Day+"";
+            string consulta = "SELECT*FROM venta WHERE YEAR(fecha)=" + fecha.Year + " AND MONTH(fecha)=" + fecha.Month + " AND DAY(fecha)=" + fecha.Day + "";
 
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
@@ -185,7 +185,7 @@ namespace FirstFloor.ModernUI.App.Control
             while (rdr.Read())
             {
                 total = total + 1;
-                
+
 
             }
             getconexion.CerrarConexion();
@@ -256,14 +256,14 @@ namespace FirstFloor.ModernUI.App.Control
             return total;
 
         }
-        
+
 
         public List<MVentas> getVentasByidProd(string idproducto)
         {
             MySqlDataReader rdr = null;
             List<MVentas> Listventas = new List<MVentas>();
 
-            string consulta = "SELECT*FROM venta WHERE idProducto="+idproducto;
+            string consulta = "SELECT*FROM venta WHERE idProducto=\"" + idproducto + "\"";
 
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
@@ -372,7 +372,7 @@ namespace FirstFloor.ModernUI.App.Control
             MySqlDataReader rdr = null;
             int total = 0;
 
-           string consulta = "SELECT*FROM venta WHERE MONTH(fecha) =" + fecha.Month + " AND year(fecha)=" + fecha.Year+" AND tipoVenta=\"cheque\"";
+            string consulta = "SELECT*FROM venta WHERE MONTH(fecha) =" + fecha.Month + " AND year(fecha)=" + fecha.Year + " AND tipoVenta=\"cheque\"";
 
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
@@ -389,12 +389,12 @@ namespace FirstFloor.ModernUI.App.Control
 
         }
 
-        public List<MVentas> getVentasbyIdProdGroupByFecha(string idproducto,DateTime fecha)
+        public List<MVentas> getVentasbyIdProdGroupByFecha(string idproducto, DateTime fecha)
         {
             MySqlDataReader rdr = null;
             List<MVentas> Listventas = new List<MVentas>();
 
-            string consulta = "SELECT fecha, idProducto,(SELECT nombre FROM db.producto WHERE idProducto=" + idproducto + ") as nombre,sum(cantidad)as cantidad, sum(total) as total ,(SELECT idCategoria FROM db.producto WHERE idProducto="+idproducto+") as idCategoria  FROM db.venta  where idProducto=" + idproducto + " AND month(fecha)="+fecha.Month+" AND year(fecha)="+fecha.Year+" GROUP BY fecha;";
+            string consulta = "SELECT fecha, idProducto,(SELECT nombre FROM db.producto WHERE idProducto=\"" + idproducto + "\") as nombre,sum(cantidad)as cantidad, sum(total) as total ,(SELECT idCategoria FROM db.producto WHERE idProducto=\"" + idproducto + "\") as idCategoria  FROM db.venta  where idProducto=\"" + idproducto + "\" AND month(fecha)=" + fecha.Month + " AND year(fecha)=" + fecha.Year + " GROUP BY fecha;";
 
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
@@ -415,8 +415,8 @@ namespace FirstFloor.ModernUI.App.Control
             MySqlDataReader rdr = null;
             List<MVentas> Listventas = new List<MVentas>();
 
-            //string consulta = "SELECT fecha, idProducto,(SELECT nombre FROM db.producto WHERE idProducto=" + idproducto + ") as nombre,sum(cantidad)as cantidad, sum(total) as total ,(SELECT idCategoria FROM db.producto WHERE idProducto=" + idproducto + ") as idCategoria  FROM db.venta  where idProducto=" + idproducto + " AND month(fecha)=" + fecha.Month + " AND year(fecha)=" + fecha.Year + " GROUP BY fecha;";
-            string consulta = "SELECT fecha,idproducto,(SELECT nombre FROM db.producto WHERE idProducto=" + idproducto + ") as nombre,(select precioReal from producto where idproducto=" + idproducto + ")as precioReal,sum(cantidad), (SELECT idCategoria FROM db.producto WHERE idProducto=" + idproducto + ") as idCategoria  FROM venta WHERE  idProducto=" + idproducto + " AND month(fecha)=" + fecha.Month + " AND year(fecha)=" + fecha.Year + " GROUP BY fecha";
+            //string consulta = "SELECT fecha, idProducto,(SELECT nombre FROM db.producto WHERE idproducto=\"" + idproducto + "\") as nombre,sum(cantidad)as cantidad, sum(total) as total ,(SELECT idCategoria FROM db.producto WHERE idproducto=\"" + idproducto + "\") as idCategoria  FROM db.venta  where idproducto=\"" + idproducto + "\" AND month(fecha)=" + fecha.Month + " AND year(fecha)=" + fecha.Year + " GROUP BY fecha;";
+            string consulta = "SELECT fecha,idproducto,(SELECT nombre FROM db.producto WHERE idproducto=\"" + idproducto + "\") as nombre,(select precioReal from producto where idproducto=\"" + idproducto + "\")as precioReal,sum(cantidad), (SELECT idCategoria FROM db.producto WHERE idProducto=\"" + idproducto + "\") as idCategoria  FROM venta WHERE  idProducto=\"" + idproducto + "\" AND month(fecha)=" + fecha.Month + " AND year(fecha)=" + fecha.Year + " GROUP BY fecha";
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
 
@@ -430,19 +430,19 @@ namespace FirstFloor.ModernUI.App.Control
             return Listventas;
 
         }
-        public List<MVentas> getVentasbyIdProdSinNombreGroupByFecha(string idproducto,DateTime fecha )
+        public List<MVentas> getVentasbyIdProdSinNombreGroupByFecha(string idproducto, DateTime fecha)
         {
             MySqlDataReader rdr = null;
             List<MVentas> Listventas = new List<MVentas>();
 
-            string consulta = "SELECT fecha, idProducto,sum(cantidad)as cantidad, sum(total) as total FROM db.venta  where idProducto=" + idproducto + " AND month(fecha)=" + fecha.Month + " AND year(fecha)="+fecha.Year+" GROUP BY fecha;";
+            string consulta = "SELECT fecha, idProducto,sum(cantidad)as cantidad, sum(total) as total FROM db.venta  where idProducto=\"" + idproducto + "\" AND month(fecha)=" + fecha.Month + " AND year(fecha)=" + fecha.Year + " GROUP BY fecha;";
 
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
 
             while (rdr.Read())
             {
-                Listventas.Add(new MVentas(rdr.GetDateTime(0), rdr.GetString(1), "Sin Nombre", rdr.GetInt32(2), rdr.GetInt32(3),0));
+                Listventas.Add(new MVentas(rdr.GetDateTime(0), rdr.GetString(1), "Sin Nombre", rdr.GetInt32(2), rdr.GetInt32(3), 0));
 
             }
             getconexion.CerrarConexion();
@@ -456,14 +456,14 @@ namespace FirstFloor.ModernUI.App.Control
             List<MVentas> Listventas = new List<MVentas>();
             ProductoFacade prodFac = new ProductoFacade();
             string consulta = "";
-            bool existe=prodFac.getExisteProductoByidProd(idproducto);
+            bool existe = prodFac.getExisteProductoByidProd(idproducto);
             if (existe)
             {
-                consulta = "SELECT fecha,idproducto,(select precioReal from producto where idproducto=" + idproducto + ")as precioReal,cantidad   FROM venta WHERE idProducto=" + idproducto + " AND month(fecha)=" + fecha.Month + " AND year(fecha)=" + fecha.Year + " GROUP BY fecha;";
+                consulta = "SELECT fecha,idproducto,(select precioReal from producto where idproducto=\"" + idproducto + "\")as precioReal,cantidad   FROM venta WHERE idProducto=\"" + idproducto + "\" AND month(fecha)=" + fecha.Month + " AND year(fecha)=" + fecha.Year + " GROUP BY fecha;";
             }
             else
             {
-                consulta = "SELECT fecha,idproducto,sum(cantidad)   FROM venta WHERE idProducto=" + idproducto + " AND month(fecha)=" + fecha.Month + " AND year(fecha)=" + fecha.Year + " GROUP BY fecha;";
+                consulta = "SELECT fecha,idproducto,sum(cantidad)   FROM venta WHERE idProducto=\"" + idproducto + "\" AND month(fecha)=" + fecha.Month + " AND year(fecha)=" + fecha.Year + " GROUP BY fecha;";
             }
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
@@ -495,7 +495,7 @@ namespace FirstFloor.ModernUI.App.Control
             MySqlDataReader rdr = null;
             List<MVentas> Listventas = new List<MVentas>();
 
-            string consulta = "SELECT fecha, idProducto,(SELECT nombre FROM db.producto WHERE idProducto=" + idproducto + ") as nombre,sum(cantidad)as cantidad, sum(total) as total ,(SELECT idCategoria FROM db.producto WHERE idProducto=" + idproducto + ") as idCategoria  FROM db.venta  where idProducto=" + idproducto + " AND  YEAR(fecha)=" + fecha.Year + " AND MONTH(fecha)=" + fecha.Month + " AND DAY(fecha)=" + fecha.Day + " GROUP BY fecha;";
+            string consulta = "SELECT fecha, idProducto,(SELECT nombre FROM db.producto WHERE idProducto=\"" + idproducto + "\") as nombre,sum(cantidad)as cantidad, sum(total) as total ,(SELECT idCategoria FROM db.producto WHERE idProducto=\"" + idproducto + "\") as idCategoria  FROM db.venta  where idProducto=\"" + idproducto + "\" AND  YEAR(fecha)=" + fecha.Year + " AND MONTH(fecha)=" + fecha.Month + " AND DAY(fecha)=" + fecha.Day + " GROUP BY fecha;";
 
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
@@ -515,14 +515,14 @@ namespace FirstFloor.ModernUI.App.Control
             MySqlDataReader rdr = null;
             List<MVentas> Listventas = new List<MVentas>();
 
-            string consulta = "SELECT fecha,idproducto,(SELECT nombre FROM db.producto WHERE idProducto=" + idproducto + ") as nombre,(select precioReal from producto where idproducto=" + idproducto + ")as precioReal,sum(cantidad), (SELECT idCategoria FROM db.producto WHERE idProducto=" + idproducto + ") as idCategoria  FROM venta WHERE idProducto="+idproducto+" and YEAR(fecha)=" + fecha.Year + " AND MONTH(fecha)=" + fecha.Month + " AND DAY(fecha)=" + fecha.Day + " GROUP BY fecha;";
+            string consulta = "SELECT fecha,idproducto,(SELECT nombre FROM db.producto WHERE idproducto=\"" + idproducto + "\") as nombre,(select precioReal from producto where idproducto=\"" + idproducto + "\")as precioReal,sum(cantidad), (SELECT idCategoria FROM db.producto WHERE idProducto=\"" + idproducto + "\") as idCategoria  FROM venta WHERE idProducto=\"" + idproducto + "\" and YEAR(fecha)=" + fecha.Year + " AND MONTH(fecha)=" + fecha.Month + " AND DAY(fecha)=" + fecha.Day + " GROUP BY fecha;";
 
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
 
             while (rdr.Read())
             {
-                Listventas.Add(new MVentas(rdr.GetDateTime(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetInt32(4),(Convert.ToInt32(rdr.GetString(3)) * rdr.GetInt32(4)), rdr.GetInt32(5)));
+                Listventas.Add(new MVentas(rdr.GetDateTime(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetInt32(4), (Convert.ToInt32(rdr.GetString(3)) * rdr.GetInt32(4)), rdr.GetInt32(5)));
 
             }
             getconexion.CerrarConexion();
@@ -536,7 +536,7 @@ namespace FirstFloor.ModernUI.App.Control
             MySqlDataReader rdr = null;
             List<MVentas> Listventas = new List<MVentas>();
 
-            string consulta = "SELECT fecha, idProducto,sum(cantidad)as cantidad, sum(total) as total FROM db.venta  where idProducto=" + idproducto + " AND day(fecha)=" + fecha.Day + "  AND month(fecha)=" + fecha.Month + " AND year(fecha)=" + fecha.Year + " GROUP BY fecha;";
+            string consulta = "SELECT fecha, idProducto,sum(cantidad)as cantidad, sum(total) as total FROM db.venta  where idProducto=\"" + idproducto + "\" AND day(fecha)=" + fecha.Day + "  AND month(fecha)=" + fecha.Month + " AND year(fecha)=" + fecha.Year + " GROUP BY fecha;";
 
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
@@ -559,10 +559,10 @@ namespace FirstFloor.ModernUI.App.Control
             List<MVentas> Listventas = new List<MVentas>();
             ProductoFacade prodFac = new ProductoFacade();
             string consulta = "";
-            bool existe=prodFac.getExisteProductoByidProd(idproducto);
+            bool existe = prodFac.getExisteProductoByidProd(idproducto);
             if (existe)
             {
-                consulta = "SELECT fecha,idproducto,(select precioReal from producto where idproducto=" + idproducto + ")as precioReal,cantidad   FROM venta WHERE YEAR(fecha)=" + fecha.Year + " AND MONTH(fecha)=" + fecha.Month + " AND DAY(fecha)=" + fecha.Day + " GROUP BY fecha;";
+                consulta = "SELECT fecha,idproducto,(select precioReal from producto where idproducto=\"" + idproducto + "\")as precioReal,cantidad   FROM venta WHERE YEAR(fecha)=" + fecha.Year + " AND MONTH(fecha)=" + fecha.Month + " AND DAY(fecha)=" + fecha.Day + " GROUP BY fecha;";
             }
             else
             {
@@ -578,9 +578,9 @@ namespace FirstFloor.ModernUI.App.Control
                 {
                     Listventas.Add(new MVentas(rdr.GetDateTime(0), rdr.GetString(1), "Sin Nombre", rdr.GetString(2), rdr.GetInt32(3), Convert.ToInt32(rdr.GetInt32(2)) * rdr.GetInt32(3), 0));
                 }
-                else 
+                else
                 {
-                    Listventas.Add(new MVentas(rdr.GetDateTime(0), rdr.GetString(1), "Sin Nombre", "0", rdr.GetInt32(2),0, 0));
+                    Listventas.Add(new MVentas(rdr.GetDateTime(0), rdr.GetString(1), "Sin Nombre", "0", rdr.GetInt32(2), 0, 0));
 
                 }
 
@@ -600,7 +600,7 @@ namespace FirstFloor.ModernUI.App.Control
             MySqlDataReader rdr = null;
             List<MVentas> Listventas = new List<MVentas>();
 
-            string consulta = "SELECT fecha, idProducto,(SELECT nombre FROM db.producto WHERE idProducto=" + idproducto + ") as nombre,sum(cantidad)as cantidad, sum(total) as total ,(SELECT idCategoria FROM db.producto WHERE idProducto=" + idproducto + ") as idCategoria  FROM db.venta  where idProducto=" + idproducto + " AND year(fecha)=" + fecha.Year + "  GROUP BY fecha;";
+            string consulta = "SELECT fecha, idProducto,(SELECT nombre FROM db.producto WHERE idproducto=\"" + idproducto + "\") as nombre,sum(cantidad)as cantidad, sum(total) as total ,(SELECT idCategoria FROM db.producto WHERE idproducto=\"" + idproducto + "\") as idCategoria  FROM db.venta  where idproducto=\"" + idproducto + "\" AND year(fecha)=" + fecha.Year + "  GROUP BY fecha;";
 
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
@@ -705,8 +705,8 @@ namespace FirstFloor.ModernUI.App.Control
             MySqlDataReader rdr = null;
             List<MVentas> Listventas = new List<MVentas>();
 
-            //string consulta = "SELECT fecha, idProducto,(SELECT nombre FROM db.producto WHERE idProducto=" + idproducto + ") as nombre,sum(cantidad)as cantidad, sum(total) as total ,(SELECT idCategoria FROM db.producto WHERE idProducto=" + idproducto + ") as idCategoria  FROM db.venta  where idProducto=" + idproducto + " AND year(fecha)=" + fecha.Year + "  GROUP BY fecha;";
-            string consulta = "SELECT fecha,idproducto,(SELECT nombre FROM db.producto WHERE idProducto=" + idproducto + ") as nombre,(select precioReal from producto where idproducto=" + idproducto + ")as precioReal,sum(cantidad), (SELECT idCategoria FROM db.producto WHERE idProducto=" + idproducto + ") as idCategoria  FROM venta WHERE  idProducto=" + idproducto + " AND year(fecha)=" + fecha.Year + "  GROUP BY fecha;";
+            //string consulta = "SELECT fecha, idProducto,(SELECT nombre FROM db.producto WHERE idproducto=\"" + idproducto + "\") as nombre,sum(cantidad)as cantidad, sum(total) as total ,(SELECT idCategoria FROM db.producto WHERE idproducto=\"" + idproducto + "\") as idCategoria  FROM db.venta  where idproducto=\"" + idproducto + "\" AND year(fecha)=" + fecha.Year + "  GROUP BY fecha;";
+            string consulta = "SELECT fecha,idproducto,(SELECT nombre FROM db.producto WHERE idproducto=\"" + idproducto + "\") as nombre,(select precioReal from producto where idproducto=\"" + idproducto + "\")as precioReal,sum(cantidad), (SELECT idCategoria FROM db.producto WHERE idproducto=\"" + idproducto + "\") as idCategoria  FROM venta WHERE  idproducto=\"" + idproducto + "\" AND year(fecha)=" + fecha.Year + "  GROUP BY fecha;";
 
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
@@ -728,7 +728,7 @@ namespace FirstFloor.ModernUI.App.Control
             MySqlDataReader rdr = null;
             List<MVentas> Listventas = new List<MVentas>();
 
-            string consulta = "SELECT fecha, idProducto,sum(cantidad)as cantidad, sum(total) as total FROM db.venta  where idProducto=" + idproducto + " AND year(fecha)=" + fecha.Year + "  GROUP BY fecha;";
+            string consulta = "SELECT fecha, idProducto,sum(cantidad)as cantidad, sum(total) as total FROM db.venta  where idproducto=\"" + idproducto + "\" AND year(fecha)=" + fecha.Year + "  GROUP BY fecha;";
 
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
@@ -749,15 +749,15 @@ namespace FirstFloor.ModernUI.App.Control
             List<MVentas> Listventas = new List<MVentas>();
             ProductoFacade prodFac = new ProductoFacade();
             string consulta = "";
-            bool existe=prodFac.getExisteProductoByidProd(idproducto);
+            bool existe = prodFac.getExisteProductoByidProd(idproducto);
             if (existe)
             {
-                //string consulta = "SELECT fecha, idProducto,sum(cantidad)as cantidad, sum(total) as total FROM db.venta  where idProducto=" + idproducto + " AND year(fecha)=" + fecha.Year + "  GROUP BY fecha;";
-                 consulta = "SELECT fecha,idproducto,(select precioReal from producto where idproducto=" + idproducto + ")as precioReal,cantidad   FROM venta WHERE idProducto=" + idproducto + " AND year(fecha)=" + fecha.Year + "  GROUP BY fecha";
+                //string consulta = "SELECT fecha, idProducto,sum(cantidad)as cantidad, sum(total) as total FROM db.venta  where idproducto=\"" + idproducto + "\" AND year(fecha)=" + fecha.Year + "  GROUP BY fecha;";
+                consulta = "SELECT fecha,idproducto,(select precioReal from producto where idproducto=\"" + idproducto + "\")as precioReal,cantidad   FROM venta WHERE idproducto=\"" + idproducto + "\" AND year(fecha)=" + fecha.Year + "  GROUP BY fecha";
             }
             else
             {
-                consulta = "SELECT fecha,idproducto,sum(cantidad)   FROM venta WHERE idProducto=" + idproducto + " AND year(fecha)=" + fecha.Year + "  GROUP BY fecha";
+                consulta = "SELECT fecha,idproducto,sum(cantidad)   FROM venta WHERE idproducto=\"" + idproducto + "\" AND year(fecha)=" + fecha.Year + "  GROUP BY fecha";
             }
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
@@ -783,7 +783,7 @@ namespace FirstFloor.ModernUI.App.Control
 
         }
 
-        
+
         public List<MVentas> getVentasByFechaAño(DateTime fecha)
         {
             MySqlDataReader rdr = null;
@@ -805,12 +805,12 @@ namespace FirstFloor.ModernUI.App.Control
 
         }
         //Detales de Venta para devolucion
-        public List<MVentas> getVentasForDevolucion(double id,string idProducto, DateTime fecha)
+        public List<MVentas> getVentasForDevolucion(double id, string idProducto, DateTime fecha)
         {
             MySqlDataReader rdr = null;
             List<MVentas> Listventas = new List<MVentas>();
 
-            string consulta = "SELECT*FROM venta WHERE idVenta="+id+" and idProducto=\""+idProducto+"\" and day(fecha)="+fecha.Day+" and month(fecha)="+fecha.Month+" and year(fecha)="+fecha.Year;
+            string consulta = "SELECT*FROM venta WHERE idVenta=" + id + " and idProducto=\"" + idProducto + "\" and day(fecha)=" + fecha.Day + " and month(fecha)=" + fecha.Month + " and year(fecha)=" + fecha.Year;
 
             MySqlCommand cmd = new MySqlCommand(consulta, getconexion.getConexion());
             rdr = cmd.ExecuteReader();
@@ -825,18 +825,18 @@ namespace FirstFloor.ModernUI.App.Control
             return Listventas;
 
         }
-        public string borrarventaByidVenta(double id, string idProducto,DateTime fecha)
+        public string borrarventaByidVenta(double id, string idProducto, DateTime fecha)
         {
             string borrar = "";
             try
             {
-                
+
                 MySqlDataAdapter adapter = new MySqlDataAdapter();
                 string cons = "DELETE FROM venta WHERE  idVenta=" + id + " and idProducto=\"" + idProducto + "\" and day(fecha)=" + fecha.Day + " and month(fecha)=" + fecha.Month + " and year(fecha)=" + fecha.Year;
                 MySqlCommand cmdCategoria = new MySqlCommand(cons, getconexion.getConexion());
                 cmdCategoria.ExecuteNonQuery();
 
-                
+
             }
             catch (Exception e)
             {
@@ -846,7 +846,7 @@ namespace FirstFloor.ModernUI.App.Control
 
 
         }
-        public string actualizarventaDevolucion(double id, string idProducto, DateTime fecha,int cantidad, int total)
+        public string actualizarventaDevolucion(double id, string idProducto, DateTime fecha, int cantidad, int total)
         {
             //Boolean guardar = false;
             string res = "";
@@ -879,7 +879,7 @@ namespace FirstFloor.ModernUI.App.Control
         }
 
 
-        
+
     }
 
 
