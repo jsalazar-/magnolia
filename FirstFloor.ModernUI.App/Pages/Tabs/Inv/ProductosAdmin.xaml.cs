@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using FirstFloor.ModernUI.App.Control;
 using FirstFloor.ModernUI.App.Modelo;
+using System.Globalization;
 
 namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
 {
@@ -23,7 +24,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
     /// </summary>
     public partial class ProductosAdmin : UserControl
     {
-
+        CultureInfo us = new CultureInfo("en-US");
         List<Producto> ListProductos = new List<Producto>();
         CollectionViewSource itemCollectionViewSource;
         Codigos tabCodigos = new Codigos();
@@ -106,7 +107,11 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
             {
                 foreach (var item in listaProd)
                 {
-                    ListProductos.Add(new Producto { idProducto = item.idProducto, nombre = item.nombre, stock = item.stock, precioReal = item.precioReal, precio = item.precio, idCategoria = item.idCategoria, fecha = item.fecha });
+                    int p = ToEntero(item.precioReal, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    string m = p.ToString("#,#", CultureInfo.InvariantCulture);
+                    int p1 = ToEntero(item.precio, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    string m1 = p1.ToString("#,#", CultureInfo.InvariantCulture);
+                    ListProductos.Add(new Producto { idProducto = item.idProducto, nombre = item.nombre, stock = item.stock, precioReal = m, precio = m1, idCategoria = item.idCategoria, fecha = item.fecha });
                 }
 
                 datagridProducto.ItemsSource = ListProductos;
@@ -138,7 +143,11 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
             {
                 foreach (var item in listaProd)
                 {
-                    ListProductos.Add(new Producto { idProducto = item.idProducto, nombre = item.nombre, stock = item.stock, precioReal = item.precioReal, precio = item.precio, idCategoria = item.idCategoria, fecha = item.fecha });
+                    int p = ToEntero(item.precioReal, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    string m = p.ToString("#,#", CultureInfo.InvariantCulture);
+                    int p1 = ToEntero(item.precio, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    string m1 = p1.ToString("#,#", CultureInfo.InvariantCulture);
+                    ListProductos.Add(new Producto { idProducto = item.idProducto, nombre = item.nombre, stock = item.stock, precioReal = m, precio = m1, idCategoria = item.idCategoria, fecha = item.fecha });
                 }
 
                 datagridProducto.ItemsSource = ListProductos;
@@ -164,7 +173,11 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
             {
                 foreach (var item in listaProd)
                 {
-                    ListProductos.Add(new Producto { idProducto = item.idProducto, nombre = item.nombre, stock = item.stock, precioReal = item.precioReal, precio = item.precio, idCategoria = item.idCategoria, fecha = item.fecha });
+                    int p = ToEntero(item.precioReal, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    string m = p.ToString("#,#", CultureInfo.InvariantCulture);
+                    int p1 = ToEntero(item.precio, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    string m1 = p1.ToString("#,#", CultureInfo.InvariantCulture);
+                    ListProductos.Add(new Producto { idProducto = item.idProducto, nombre = item.nombre, stock = item.stock, precioReal = m, precio = m1, idCategoria = item.idCategoria, fecha = item.fecha });
                 }
 
                 datagridProducto.ItemsSource = ListProductos;
@@ -198,8 +211,8 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
                     {
                         if (!string.IsNullOrWhiteSpace(txtprecio.Text))
                         {
-                            int compra = Convert.ToInt32(txtprecioReal.Text);
-                            int venta = Convert.ToInt32(txtprecio.Text);
+                            int compra = ToEntero(txtprecioReal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                            int venta = ToEntero(txtprecio.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
                             if (compra < venta)
                             {
 
@@ -219,8 +232,10 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
                                             string nombreProd = txtnombreproducto.Text;
                                             string nombreCat = cbCategoria.SelectedValue.ToString();
                                             string stock = txtstock.Text;
-                                            string precioReal = txtprecioReal.Text;
-                                            string precio = txtprecio.Text;
+                                            int pR = ToEntero(txtprecioReal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                                            string precioReal = pR.ToString();
+                                            int p = ToEntero(txtprecio.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                                            string precio = p.ToString();
                                             //string res=prodF.GuardarProducto()
 
                                             //Agregar idCategoria al idProducto + el numItem
@@ -307,8 +322,10 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
                                         string nombreProd = txtnombreproducto.Text;
                                         string nombreCat = cbCategoria.SelectedValue.ToString();
                                         string stock = txtstock.Text;
-                                        string precioReal = txtprecioReal.Text;
-                                        string precio = txtprecio.Text;
+                                        int pR = ToEntero(txtprecioReal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                                        string precioReal = pR.ToString();
+                                        int p = ToEntero(txtprecio.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                                        string precio = p.ToString();
                                         //string res=prodF.GuardarProducto()
 
                                         //Agregar idCategoria al idProducto + el numItem
@@ -408,8 +425,13 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
                         txtcodprod.Text = row.idProducto;
                         txtnombreproducto.Text = row.nombre;
                         txtstock.Text = row.stock;
-                        txtprecioReal.Text = row.precioReal;
-                        txtprecio.Text = row.precio;
+                        int pR = ToEntero(row.precioReal, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                        txtprecioReal.Text = pR.ToString("#,#", CultureInfo.InvariantCulture);
+
+
+                        int p = ToEntero(row.precio, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                        txtprecio.Text = p.ToString("#,#", CultureInfo.InvariantCulture);
+
                         ProductoFacade prodF = new ProductoFacade();
                         categoriaFacade catFac = new categoriaFacade();
                         string nombreCat = catFac.getCategoriaById(prodF.getIdCatbyidProd(row.idProducto));
@@ -438,8 +460,9 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
                     {
                         if (!string.IsNullOrWhiteSpace(txtprecio.Text))
                         {
-                            int compra = Convert.ToInt32(txtprecioReal.Text);
-                            int venta = Convert.ToInt32(txtprecio.Text);
+                            int compra = ToEntero(txtprecioReal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                            int venta = ToEntero(txtprecio.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                            
                             if (compra < venta)
                             {
                                 //MessageBox.Show(val.ToString().Length.ToString());
@@ -452,8 +475,10 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
                                     string nombreProd = txtnombreproducto.Text;
                                     string nombreCat = cbCategoria.SelectedValue.ToString();
                                     string stock = txtstock.Text;
-                                    string precioReal = txtprecioReal.Text;
-                                    string precio = txtprecio.Text;
+                                    int pR = ToEntero(txtprecioReal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                                    string precioReal = pR.ToString();
+                                    int p = ToEntero(txtprecio.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                                    string precio = p.ToString();
                                     //string res=prodF.GuardarProducto()
 
                                     //Agregar idCategoria al idProducto + el numItem
@@ -626,7 +651,11 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
             {
                 foreach (var item in listaProd)
                 {
-                    ListProductos.Add(new Producto { idProducto = item.idProducto, nombre = item.nombre, stock = item.stock, precioReal = item.precioReal, precio = item.precio, idCategoria = item.idCategoria, fecha = item.fecha });
+                    int p = ToEntero(item.precioReal, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    string m = p.ToString("#,#", CultureInfo.InvariantCulture);
+                    int p1 = ToEntero(item.precio, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    string m1 = p1.ToString("#,#", CultureInfo.InvariantCulture);
+                    ListProductos.Add(new Producto { idProducto = item.idProducto, nombre = item.nombre, stock = item.stock, precioReal = m, precio = m1, idCategoria = item.idCategoria, fecha = item.fecha });
                 }
 
                 datagridProducto.ItemsSource = ListProductos;
@@ -917,6 +946,37 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
             translogin.pageTransitionControl.ShowPage(codVend);
         }
 
+       
+        private void txtprecio_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int p = ToEntero(txtprecio.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+            txtprecio.Text = p.ToString("#,#", CultureInfo.InvariantCulture); 
+        }
+
+        private void txtprecioReal_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int p = ToEntero(txtprecioReal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+            txtprecioReal.Text = p.ToString("#,#", CultureInfo.InvariantCulture); ;
+        }
+        private int ToEntero(string value, NumberStyles style, IFormatProvider provider)
+        {
+            try
+            {
+                int number = Int32.Parse(value, style, provider);
+                //Console.WriteLine("Converted '{0}' to {1}.", value, number);
+                return number;
+            }
+            catch (FormatException)
+            {
+                //MessageBox.Show("Unable to convert '{0}'.", value);
+                return 0;
+            }
+            catch (OverflowException)
+            {
+                MessageBox.Show("'{0}' Numero fuera de rango para tipo Int32.", value);
+                return 0;
+            }
+        }
 
     }
 }

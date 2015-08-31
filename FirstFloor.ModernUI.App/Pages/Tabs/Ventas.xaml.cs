@@ -52,7 +52,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
         VentaTemporal ventaTemp = new VentaTemporal();
         string fechaDevolucion = "";
         CultureInfo ci = new CultureInfo("en-us");
-
+        CultureInfo us = new CultureInfo("en-US");
 
         public Ventas(string rutofLogin)
         {
@@ -222,7 +222,8 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                     //MessageBox.Show(i.total.ToString());
                     numProducto = numProducto + 1;
                 }
-                txtsubtotal.Text = (Convert.ToInt32(txtsubtotal.Text)).ToString();
+                int p = ToEntero(txtsubtotal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                txtsubtotal.Text = p.ToString("#,#", CultureInfo.InvariantCulture); ;
                 //                txtDiferencia.Text = (Convert.ToInt32(txtsubtotal.Text) - dineroDevolucion).ToString();
                 txtCantidadProductos.Content = numProducto.ToString();
                 if (Convert.ToInt32(txtdescuento.Text) == 0)
@@ -248,8 +249,13 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                     {
                         mtotalDevo = mtotalDevo * -1;
                     }
-                    txtsubtotal.Text = mtotalDevo.ToString();
-                    txttotal.Text = mtotalDevo.ToString();
+                    int pr = ToEntero(mtotalDevo.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    txtsubtotal.Text = pr.ToString("#,#", CultureInfo.InvariantCulture); ;
+
+                    int prT = ToEntero(mtotalDevo.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
+
+                    
                     /********************************************************/
 
                 }
@@ -257,8 +263,13 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                 {
                     //falto en varia parte el pasar 
                     double des = Convert.ToDouble(txtdescuento.Text) / Convert.ToInt32(100);
-                    double totalDes = Convert.ToInt32(txtsubtotal.Text) - Convert.ToDouble(txtsubtotal.Text) * des;
-                    txttotal.Text = (totalDes).ToString();
+                    int pr = ToEntero(txtsubtotal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    double totalDes = Convert.ToInt32(pr) - Convert.ToDouble(pr) * des;
+
+                    int prT = ToEntero(totalDes.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
+
+                    
                     //txtDiferencia.Text = (totalDes - dineroDevolucion).ToString();
                 }
             }
@@ -358,8 +369,12 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                     {
                         mtotalDevo = mtotalDevo * -1;
                     }
-                    txtsubtotal.Text = mtotalDevo.ToString();
-                    txttotal.Text = mtotalDevo.ToString();
+                    int p = ToEntero(mtotalDevo.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    txtsubtotal.Text = p.ToString("#,#", CultureInfo.InvariantCulture);
+
+                    int prT = ToEntero(mtotalDevo.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
+                    
                     /********************************************************/
 
                     //txttotal.Text = txtsubtotal.Text;
@@ -388,8 +403,14 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                     {
                         mtotalDevo = mtotalDevo * -1;
                     }
-                    txtsubtotal.Text = mtotalDevo.ToString();
-                    txttotal.Text = (mtotalDevo - mtotalDevo * des).ToString();
+                    int p = ToEntero(mtotalDevo.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    txtsubtotal.Text = p.ToString("#,#", CultureInfo.InvariantCulture);
+
+                    double d= (mtotalDevo - mtotalDevo * des);
+
+                    int prT = ToEntero(d.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
+
                     /********************************************************/
                 }
                 RaiseEvent(new RoutedEventArgs(IncreaseClickedEvent));
@@ -437,7 +458,14 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                             int total = Convert.ToInt32(Prod.precio) * Convert.ToInt32(Value);
                             vtemporal[filaProd].cantidad = Value.ToString();
                             vtemporal[filaProd].total = total.ToString();
-                            txttotal.Text = (Convert.ToDouble(txttotal.Text) - dineroDevolucion).ToString();
+
+
+                            string d = (Convert.ToDouble(txttotal.Text) - dineroDevolucion).ToString();
+
+                            int prT = ToEntero(d, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                            txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
+
+                            
 
                             datagridVentas.ItemsSource = null;
                             datagridVentas.ItemsSource = vtemporal;
@@ -463,7 +491,9 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                     //MessageBox.Show(i.total.ToString());
                     numProducto = numProducto + 1;
                 }
-                txtsubtotal.Text = subtotal.ToString();
+                int p = ToEntero(subtotal.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                txtsubtotal.Text = p.ToString("#,#", CultureInfo.InvariantCulture);
+
                 txtCantidadProductos.Content = numProducto.ToString();
                 if (Convert.ToInt32(txtdescuento.Text) == 0)
                 {
@@ -488,8 +518,12 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                     {
                         mtotalDevo = mtotalDevo * -1;
                     }
-                    txtsubtotal.Text = mtotalDevo.ToString();
-                    txttotal.Text = mtotalDevo.ToString();
+
+                    int pr = ToEntero(mtotalDevo.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    txtsubtotal.Text = pr.ToString("#,#", CultureInfo.InvariantCulture);
+                    int prT = ToEntero(mtotalDevo.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
+                    
                     /********************************************************/
 
                 }
@@ -516,8 +550,12 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                     {
                         mtotalDevo = mtotalDevo * -1;
                     }
-                    txtsubtotal.Text = mtotalDevo.ToString();
-                    txttotal.Text = (mtotalDevo - mtotalDevo * des).ToString();
+                    int pr = ToEntero(mtotalDevo.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    txtsubtotal.Text = pr.ToString("#,#", CultureInfo.InvariantCulture);
+                    
+                    string  g = (mtotalDevo - mtotalDevo * des).ToString();
+                    int prT = ToEntero(g, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
                     /********************************************************/
                     //                    txttotal.Text = (Convert.ToInt32(txtsubtotal.Text) - Convert.ToDouble(txtsubtotal.Text) * des).ToString();
                 }
@@ -733,6 +771,9 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                             if (txtcodProdVenta.Text.Equals(rv.idProducto))
                             {
                                 sumarCantidad = true;
+                                /*int pre = ToEntero(rv.precio, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                                string m = pre.ToString("#,#", CultureInfo.InvariantCulture);
+                                MessageBox.Show(rv.precio);*/
                                 vtemp = new VentaTemporal(rv.idVenta, rv.idProducto, rv.nombre, rv.precio, rv.cantidad, rv.total);
                                 cantidad = Convert.ToInt32(rv.cantidad) + 1;
                                 filaProd = num;
@@ -812,19 +853,24 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
             {
                 mtotalDevo = mtotalDevo * -1;
             }
-            txtsubtotal.Text = mtotalDevo.ToString();
+            int p = ToEntero(mtotalDevo.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+            txtsubtotal.Text = p.ToString("#,#", CultureInfo.InvariantCulture); 
 
 
             txtCantidadProductos.Content = numProducto.ToString();
             if (Convert.ToInt32(txtdescuento.Text) == 0)
             {
+                int pr = ToEntero(txtsubtotal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                txttotal.Text = pr.ToString("#,#", CultureInfo.InvariantCulture);
 
-                txttotal.Text = txtsubtotal.Text;
             }
             else
             {
+                int pr = ToEntero(txtsubtotal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+
                 double des = Convert.ToDouble(txtdescuento.Text) / Convert.ToInt32(100);
-                txttotal.Text = (Convert.ToInt32(txtsubtotal.Text) - Convert.ToDouble(txtsubtotal.Text) * des).ToString();
+                double res = (Convert.ToInt32(pr) - Convert.ToDouble(pr) * des);
+                txttotal.Text = res.ToString("#,#", CultureInfo.InvariantCulture);
             }
 
         }
@@ -884,7 +930,11 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
 
             txtCantidadProductos.Content = numProducto.ToString();
             txtsubtotal.Text = subtotal.ToString();
-            txttotal.Text = subtotal.ToString();
+
+            int prT = ToEntero(subtotal.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+            txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
+
+            
             int d = subtotal - dineroDevolucion;
             if (d < 0)
             {
@@ -1012,7 +1062,8 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                 }
                 foreach (var item in listVentatemporal)
                 {
-                    MVentas vts = new MVentas(item.idVenta, item.idProducto, rutcliente, rutLogin, Convert.ToInt32(item.cantidad), Convert.ToDouble(txttotal.Text), fechaactual, tipopago
+                    int p = ToEntero(txttotal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                    MVentas vts = new MVentas(item.idVenta, item.idProducto, rutcliente, rutLogin, Convert.ToInt32(item.cantidad), Convert.ToDouble(p), fechaactual, tipopago
                         );
                     listVentas.Add(vts);
 
@@ -1031,7 +1082,10 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                         //actualizar deuda y total de compras
                         clienteFacade clienteFac = new clienteFacade();
                         //MessageBox.Show("rut cliente a fiar:"+rutcliente);
-                        string rActu = clienteFac.actualizar_DFT_Cliente(rutcliente, Convert.ToDouble(txttotal.Text), fechaactual);
+                        int p = ToEntero(txttotal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                         
+
+                        string rActu = clienteFac.actualizar_DFT_Cliente(rutcliente, Convert.ToDouble(p), fechaactual);
                         if (rActu.Equals(""))
                         {
                             MessageBox.Show("Deuda ingresada a usuario:" + nombreCliente + "", "Magnolia", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -1587,7 +1641,9 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
 
         private void btndeledesc_Button_Click(object sender, RoutedEventArgs e)
         {
-            txttotal.Text = txtsubtotal.Text;
+            int prT = ToEntero(txtsubtotal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+            txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
+            
             txtdescuento.Text = "0";
             rutcliente = "";
             nombreCliente = "";
@@ -1603,8 +1659,9 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
             nombreCliente = dc.getnombreCliente();
 
             double des = Convert.ToDouble(txtdescuento.Text) / Convert.ToInt32(100);
-
-            txttotal.Text = (Convert.ToInt32(txtsubtotal.Text) - Convert.ToInt32(txtsubtotal.Text) * des).ToString();
+            int p = ToEntero(txtsubtotal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+            double res= (Convert.ToInt32(p) - Convert.ToInt32(p) * des);
+            txttotal.Text = res.ToString("#,#", CultureInfo.InvariantCulture); ;
 
         }
 
@@ -1685,6 +1742,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
             if (!string.IsNullOrEmpty(txtEntregado.Text))
             {
                 
+
                 double total = Convert.ToDouble(txttotal.Text);
                 double entregado = Convert.ToDouble(txtEntregado.Text);
                 double vuelto = entregado - total;
@@ -1701,8 +1759,11 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
             }
             else
             {
-                txtEntregado.Text = "0";
-                txtVuelto.Text = "0";
+                
+                    txtEntregado.Text = "0";
+                    txtVuelto.Text = "0";
+            
+
             }
         }
 
@@ -1763,6 +1824,25 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+        }
+        private int ToEntero(string value, NumberStyles style, IFormatProvider provider)
+        {
+            try
+            {
+                int number = Int32.Parse(value, style, provider);
+                //Console.WriteLine("Converted '{0}' to {1}.", value, number);
+                return number;
+            }
+            catch (FormatException)
+            {
+                //MessageBox.Show("Unable to convert '{0}'.", value);
+                return 0;
+            }
+            catch (OverflowException)
+            {
+                MessageBox.Show("'{0}' Numero fuera de rango para tipo Int32.", value);
+                return 0;
             }
         }
 
