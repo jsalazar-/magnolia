@@ -25,6 +25,8 @@ using System.Windows.Controls.Primitives;
 using System.Configuration;
 using FirstFloor.ModernUI.App.Modelo;
 using FirstFloor.ModernUI.App.Control;
+using System.Globalization;
+using System.Threading;
 
 namespace FirstFloor.ModernUI.App.Pages.Tabs
 {
@@ -49,6 +51,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
         int dineroDevolucion = 0;
         VentaTemporal ventaTemp = new VentaTemporal();
         string fechaDevolucion = "";
+        CultureInfo ci = new CultureInfo("en-us");
 
 
         public Ventas(string rutofLogin)
@@ -1672,17 +1675,26 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
 
             }
         }
+
+
         //Calcular el cambio segun dinero entregado para pagar  segun total
         private void txtEntregado_TextChanged(object sender, TextChangedEventArgs e)
         {
+
+            
             if (!string.IsNullOrEmpty(txtEntregado.Text))
             {
+                
                 double total = Convert.ToDouble(txttotal.Text);
                 double entregado = Convert.ToDouble(txtEntregado.Text);
                 double vuelto = entregado - total;
+
+              
+
                 if (entregado > total)
                 {
-                    txtVuelto.Text = vuelto.ToString();
+                    txtVuelto.Text = vuelto.ToString("#,#", CultureInfo.InvariantCulture);
+        
                 }
 
 

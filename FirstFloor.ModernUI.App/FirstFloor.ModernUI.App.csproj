@@ -149,12 +149,7 @@
     <Compile Include="Modelo\Categoria.cs" />
     <Compile Include="Modelo\Cheque.cs" />
     <Compile Include="Modelo\Cliente.cs" />
-    <Compile Include="Modelo\FontFamilyListItem.cs" />
-    <Compile Include="Modelo\FontSizeListItem.cs" />
-    <Compile Include="Modelo\NameDictionaryHelper.cs" />
     <Compile Include="Modelo\Producto.cs" />
-    <Compile Include="Modelo\TypefaceListItem.cs" />
-    <Compile Include="Modelo\TypographicFeatureListItem.cs" />
     <Compile Include="Modelo\Vendedor.cs" />
     <Compile Include="Modelo\Ventas.cs" />
     <Compile Include="Modelo\VentaTemporal.cs" />

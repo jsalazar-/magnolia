@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Hector\Documents\GitHub\magnolia\FirstFloor.ModernUI.App\obj\Debug\
+D:\Users\Jorge\Documents\GitHubVisualStudio\magnolia\FirstFloor.ModernUI.App\obj\Debug\
 FirstFloor.ModernUI.App
 none
 false
 DEBUG;TRACE
-C:\Users\Hector\Documents\GitHub\magnolia\FirstFloor.ModernUI.App\App.xaml
+D:\Users\Jorge\Documents\GitHubVisualStudio\magnolia\FirstFloor.ModernUI.App\App.xaml
 3078905136
 
-58152115187
-261710377000
+53190914333
+26-580316651
 Assets\ModernUI.Love.xaml;Content\ModernFrame\CancelNavigateSample.xaml;Content\ModernFrame\ErrorSample.xaml;Content\ModernFrame\Sample.xaml;MainWindow.xaml;Content\SettingsAppearance.xaml;Pages\Home.xaml;Pages\login.xaml;Pages\LoginAdmin.xaml;Pages\Tabs\BuscarProducto.xaml;Pages\Tabs\DescuentoCliente.xaml;Pages\Tabs\Devolucion.xaml;Pages\Tabs\Inv\LoginAdminProductos.xaml;Pages\Tabs\Inv\ProductosAdmin.xaml;Pages\Tabs\Inv\TransLoginToProductosAdmin.xaml;Pages\Tabs\PagoconCheque.xaml;Pages\Tabs\Registros.xaml;Pages\TransLoginToReporte.xaml;Pages\TransLoginToVenta.xaml;Pages\Users\ControlPass.xaml;Pages\Users\Vendedores.xaml;Pages\SettingsPage.xaml;Pages\Settings\About.xaml;Pages\Settings\Appearance.xaml;Pages\Users\Clientes.xaml;Pages\Tabs\Inventario.xaml;Pages\Tabs\Inv\Codigos.xaml;Pages\Tabs\Inv\Productos.xaml;Pages\Tabs\Reportes.xaml;Pages\Tabs\Ventas.xaml;
 
 False

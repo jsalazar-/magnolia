@@ -15,7 +15,8 @@ using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using FirstFloor.ModernUI.App.Control;
 using FirstFloor.ModernUI.App.Modelo;
-
+using System.Globalization;
+using System.Threading;
 namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
 {
     /// <summary>
@@ -28,6 +29,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
         CollectionViewSource itemCollectionViewSource;
         Codigos tabCodigos = new Codigos();
         TransLoginToProductosAdmin translogin;
+        CultureInfo ci = new CultureInfo("en-us");
         public Productos()
         {
             InitializeComponent();
@@ -300,6 +302,8 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
                                 string nombreCat = cbCategoria.SelectedValue.ToString();
                                 string stock = txtstock.Text;
                                 string precio = txtprecio.Text;
+
+
                                 //string res=prodF.GuardarProducto()
 
                                 //Agregar idCategoria al idProducto + el numItem
@@ -886,6 +890,6 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs.Inv
             translogin.pageTransitionControl.ShowPage(loginAdmin);//se muestra en transicion 
         }
 
-
+       
     }
 }
