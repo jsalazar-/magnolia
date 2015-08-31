@@ -1,0 +1,61 @@
+﻿<Window x:Class="FirstFloor.ModernUI.App.Pages.Tabs.Devolucion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Devolucion" Height="452" Width="684"
+        WindowStartupLocation="CenterScreen"  ResizeMode="NoResize" WindowStyle="None">
+    <Grid Background="#FF333333" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Label Content="Id Producto" HorizontalAlignment="Left" Margin="228,85,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox Name="txtidventa" HorizontalAlignment="Left" Height="23" Margin="66,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="95"  PreviewTextInput="textbox_NumberValidationTextBox" TextChanged="codProdVenta_TextChanged" Background="White" Foreground="Black" MinWidth="150" MinHeight="23" VerticalContentAlignment="Center" />
+        <Button Content="Cambiar" HorizontalAlignment="Left" Margin="488,400,0,0" VerticalAlignment="Top" Width="140" Height="34" Click="Button_Click" Foreground="White" Background="#FF009688" FontWeight="Bold" FontSize="14"/>
+        <Button Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="152,400,0,0" VerticalAlignment="Top" Width="140" Height="34" Click="btnCancelar_Click" Background="#FFFF1744" Foreground="White" FontWeight="Bold" FontSize="14"/>
+        <DataGrid x:Name="datagridVentas"
+                      	AutoGenerateColumns="False" ItemsSource="{Binding}"
+                        	CanUserAddRows="False" IsReadOnly="True" 
+                  Background="#00000000" Margin="10,152,56,118" Foreground="#FF333333" MinColumnWidth="100" GridLinesVisibility="All" HorizontalGridLinesBrush="#FFCCCCCC" VerticalGridLinesBrush="#FFCCCCCC">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID Venta" Binding="{Binding idVenta}" Width="90"/>
+                <DataGridTextColumn Header="ID Producto" Binding="{Binding idProducto}" Width="105" MinWidth="109"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding nombre}" Width="88"/>
+                <DataGridTextColumn Header="Precio" Binding="{Binding precio}" Width="75" />
+                <DataGridTextColumn Header="Cantidad" Binding="{Binding cantidad}" Width="90"/>
+                <DataGridTextColumn Header="Devolver" Binding="{Binding devolver}" Width="90"/>
+                <DataGridTextColumn Header="Total" Binding="{Binding total}" Width="80"/>
+
+                <!--<DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Borrar" x:Name="btnBorrarProdVenta"
+                Click="btnBorrarProdVenta_Click" Visibility="Visible"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox Name="TextBoxValue"
+					 PreviewTextInput="value_PreviewTextInput" TextChanged="value_TextChanged" PreviewKeyDown="value_PreviewKeyDown"					 
+                     TextAlignment="Right" MaxWidth="50" Margin="530,344,112,89" KeyDown="TextBoxValue_KeyDown" Background="White" Foreground="Black" VerticalContentAlignment="Center" />
+        <StackPanel Orientation="Vertical"		MaxWidth="25"				
+						VerticalAlignment="Center" Margin="574,344,69,89" Height="19">
+            <Button x:Name="Increase" 
+                        		Click="Increase_Click" Background="#FF009688" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Height="9">
+
+            </Button>
+            <Button x:Name="Decrease" 
+                        		Click="Decrease_Click" Background="#FFFF1744" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Height="9"					/>
+        </StackPanel>
+        <Label Content="Total a devolver     $" HorizontalAlignment="Left" Margin="415,371,0,0" VerticalAlignment="Top"/>
+        <Label Content="Cantidad a devolver" HorizontalAlignment="Left" Margin="415,347,0,0" VerticalAlignment="Top"/>
+
+        <Label Name="ltotal" Content="0" HorizontalAlignment="Left" Margin="530,371,0,0" VerticalAlignment="Top" Width="74"/>
+        <DatePicker Name="fechaventa" HorizontalAlignment="Left" Margin="516,77,0,0" VerticalAlignment="Top" Width="112" Background="White" Foreground="Black" MinWidth="150" MinHeight="23" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <Label Content="Fecha" HorizontalAlignment="Left" Margin="470,85,0,0" VerticalAlignment="Top" Width="50" FontSize="14"/>
+        <TextBox Name="txtidProducto" HorizontalAlignment="Left" Height="23" Margin="305,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged" PreviewTextInput="textbox_NumberValidationTextBox" Background="White" Foreground="Black" MinWidth="150" MinHeight="23" VerticalContentAlignment="Center"/>
+        <Label Content="Id Venta" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Button Name="btnBuscarVenta" Content="Buscar" HorizontalAlignment="Left" Margin="516,109,0,0" VerticalAlignment="Top" Click="btnBuscarVenta_Click" Foreground="White" FontWeight="Bold" Background="#FF009688"/>
+        <Button x:Name="btnDevolver" Content="Devolver" HorizontalAlignment="Left" Margin="324,400,0,0" VerticalAlignment="Top" Width="140" Height="34" Click="btnDevolver_Click" Background="#FFFFD740" Foreground="White" FontWeight="Bold" FontSize="14" />
+        <Button Name="btnbuscarID" Content="Buscar " HorizontalAlignment="Left" Margin="305,109,0,0" VerticalAlignment="Top" Click="btnbuscarID_Click" Foreground="White" FontWeight="Bold" Background="#FF009688"/>
+        <TextBlock Style="{StaticResource Heading1}" Margin="10,10,0,394" MaxWidth="295" MaxHeight="40" MinWidth="400" MinHeight="40" HorizontalAlignment="Left"  ><Run Text="Formulario de devoluc"/><Run Text="i"/><Run Text="ón"/></TextBlock>
+
+    </Grid>
+</Window>

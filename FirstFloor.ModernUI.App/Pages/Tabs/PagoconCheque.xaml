@@ -1,0 +1,29 @@
+﻿<Window x:Class="FirstFloor.ModernUI.App.Pages.Tabs.PagoconCheque"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Pagocon Cheque"  Height="360" Width="480"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None"  >
+    <Grid Background="#FF333333" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Detalles Cheque" HorizontalAlignment="Left" Margin="16,10,0,0" VerticalAlignment="Top" Height="42" Width="181" FontSize="24"/>
+        <Label Content="Fecha emisión" HorizontalAlignment="Left" Margin="15,181,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <DatePicker Name="datepickerEmision" HorizontalAlignment="Left" Margin="180,175,0,0" VerticalAlignment="Top" FirstDayOfWeek="Monday"  SelectedDateChanged="datepickerEmision_SelectedDateChanged" MinWidth="150" MinHeight="23" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="White" BorderBrush="White"/>
+        <Button Name="btnAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="390,323,0,0" VerticalAlignment="Top" Click="btnAceptar_Click" Background="#FF009688" Foreground="White" FontWeight="Bold" FontSize="13.333"/>
+        <Button Name="btnCancelar" Content="Cancelar" HorizontalAlignment="Left" Margin="256,323,0,0" VerticalAlignment="Top" Click="btnCancelar_Click" Background="#FFFF1744" Foreground="White" FontWeight="Bold" FontSize="13.333"/>
+        <Label Content="Fecha expiración" HorizontalAlignment="Left" Margin="15,222,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <DatePicker x:Name="datepickerExpiracion" HorizontalAlignment="Left" Margin="180,216,0,0" VerticalAlignment="Top" FirstDayOfWeek="Monday" SelectedDateChanged="datepickerExpiracion_SelectedDateChanged" MinWidth="150" MinHeight="23" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Foreground="White" BorderBrush="White"/>
+        <Label Content="Monto" HorizontalAlignment="Left" Margin="15,259,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox  Name="txtMonto" HorizontalAlignment="Left" Margin="180,257,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"  PreviewTextInput="NumberValidationTextBox" Background="White" Foreground="Black" VerticalContentAlignment="Center" MinWidth="150" MinHeight="23"/>
+        <Label Content="$" HorizontalAlignment="Left" Margin="156,257,0,0" VerticalAlignment="Top" FontSize="16" Height="23"/>
+        <Label Content="Nombre emisor" HorizontalAlignment="Left" Margin="15,109,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox Name="txtNombremiso" HorizontalAlignment="Left" Margin="180,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="White" Foreground="Black" VerticalContentAlignment="Center" MinWidth="150" MinHeight="23"/>
+        <Label Content="Nombre Banco" HorizontalAlignment="Left" Margin="16,144,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox Name="txtnombrebanco" HorizontalAlignment="Left" Margin="180,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="White" Foreground="Black" VerticalContentAlignment="Center" MinWidth="150" MinHeight="23"/>
+        <Label Name="txtDiferencias" Content="" HorizontalAlignment="Left" Margin="340,194,0,0" VerticalAlignment="Top"/>
+        <Label Content="Rut emisor" HorizontalAlignment="Left" Margin="15,74,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox Name="txtRutemiso" HorizontalAlignment="Left" Margin="180,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="White" Foreground="Black" VerticalContentAlignment="Center" MinWidth="150" MinHeight="23"/>
+        <Label Content="Obs:Sin puntos ni guión" HorizontalAlignment="Left" Margin="180,94,0,0" VerticalAlignment="Top" Width="131" FontSize="10"/>
+    </Grid>
+</Window>
