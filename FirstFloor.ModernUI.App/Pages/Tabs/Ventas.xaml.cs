@@ -825,8 +825,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
             }
             else
             {
-                
-                
+
 
             }
             //Recorrer tabla para sumar total
