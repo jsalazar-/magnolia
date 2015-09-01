@@ -90,14 +90,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModernUIDemo.exe" size="2084352">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModernUIDemo.exe" size="2085376">
       <assemblyIdentity name="ModernUIDemo" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ZcnEfUf5a7LMNJav8OkRVqJEDrQ+d406nBdlr7BNyGw=</dsig:DigestValue>
+        <dsig:DigestValue>XjLIGMkS9LA5DCq0Eli2ePJpxY11cgS57jc+CxyAH5g=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

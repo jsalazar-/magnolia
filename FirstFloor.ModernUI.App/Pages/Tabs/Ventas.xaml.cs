@@ -57,6 +57,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
         public Ventas(string rutofLogin)
         {
             InitializeComponent();
+            txtcodProdVenta.Focus();
             //control spinBox
             _numMatch = new Regex(@"^-?\d+$");
             Maximum = 9999;
@@ -255,7 +256,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                     int prT = ToEntero(mtotalDevo.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
                     txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
 
-                    
+
                     /********************************************************/
 
                 }
@@ -269,7 +270,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                     int prT = ToEntero(totalDes.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
                     txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
 
-                    
+
                     //txtDiferencia.Text = (totalDes - dineroDevolucion).ToString();
                 }
             }
@@ -374,7 +375,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
 
                     int prT = ToEntero(mtotalDevo.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
                     txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
-                    
+
                     /********************************************************/
 
                     //txttotal.Text = txtsubtotal.Text;
@@ -406,7 +407,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                     int p = ToEntero(mtotalDevo.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
                     txtsubtotal.Text = p.ToString("#,#", CultureInfo.InvariantCulture);
 
-                    double d= (mtotalDevo - mtotalDevo * des);
+                    double d = (mtotalDevo - mtotalDevo * des);
 
                     int prT = ToEntero(d.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
                     txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
@@ -465,7 +466,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                             int prT = ToEntero(d, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
                             txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
 
-                            
+
 
                             datagridVentas.ItemsSource = null;
                             datagridVentas.ItemsSource = vtemporal;
@@ -523,7 +524,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                     txtsubtotal.Text = pr.ToString("#,#", CultureInfo.InvariantCulture);
                     int prT = ToEntero(mtotalDevo.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
                     txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
-                    
+
                     /********************************************************/
 
                 }
@@ -552,8 +553,8 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                     }
                     int pr = ToEntero(mtotalDevo.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
                     txtsubtotal.Text = pr.ToString("#,#", CultureInfo.InvariantCulture);
-                    
-                    string  g = (mtotalDevo - mtotalDevo * des).ToString();
+
+                    string g = (mtotalDevo - mtotalDevo * des).ToString();
                     int prT = ToEntero(g, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
                     txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
                     /********************************************************/
@@ -824,6 +825,8 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
             }
             else
             {
+                
+                
 
             }
             //Recorrer tabla para sumar total
@@ -854,7 +857,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                 mtotalDevo = mtotalDevo * -1;
             }
             int p = ToEntero(mtotalDevo.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
-            txtsubtotal.Text = p.ToString("#,#", CultureInfo.InvariantCulture); 
+            txtsubtotal.Text = p.ToString("#,#", CultureInfo.InvariantCulture);
 
 
             txtCantidadProductos.Content = numProducto.ToString();
@@ -934,7 +937,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
             int prT = ToEntero(subtotal.ToString(), NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
             txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
 
-            
+
             int d = subtotal - dineroDevolucion;
             if (d < 0)
             {
@@ -1083,7 +1086,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
                         clienteFacade clienteFac = new clienteFacade();
                         //MessageBox.Show("rut cliente a fiar:"+rutcliente);
                         int p = ToEntero(txttotal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
-                         
+
 
                         string rActu = clienteFac.actualizar_DFT_Cliente(rutcliente, Convert.ToDouble(p), fechaactual);
                         if (rActu.Equals(""))
@@ -1643,7 +1646,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
         {
             int prT = ToEntero(txtsubtotal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
             txttotal.Text = prT.ToString("#,#", CultureInfo.InvariantCulture); ;
-            
+
             txtdescuento.Text = "0";
             rutcliente = "";
             nombreCliente = "";
@@ -1660,7 +1663,7 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
 
             double des = Convert.ToDouble(txtdescuento.Text) / Convert.ToInt32(100);
             int p = ToEntero(txtsubtotal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
-            double res= (Convert.ToInt32(p) - Convert.ToInt32(p) * des);
+            double res = (Convert.ToInt32(p) - Convert.ToInt32(p) * des);
             txttotal.Text = res.ToString("#,#", CultureInfo.InvariantCulture); ;
 
         }
@@ -1738,33 +1741,45 @@ namespace FirstFloor.ModernUI.App.Pages.Tabs
         private void txtEntregado_TextChanged(object sender, TextChangedEventArgs e)
         {
 
-            
+
             if (!string.IsNullOrEmpty(txtEntregado.Text))
             {
-                
 
-                double total = Convert.ToDouble(txttotal.Text);
-                double entregado = Convert.ToDouble(txtEntregado.Text);
+                int p = ToEntero(txtEntregado.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                int t = ToEntero(txttotal.Text, NumberStyles.Float | NumberStyles.AllowThousands, new CultureInfo("en-GB"));
+                txtEntregado.Text = p.ToString("#,#", CultureInfo.InvariantCulture);
+                txtEntregado.Focus();
+                txtEntregado.SelectionStart = txtEntregado.Text.Length;
+
+                double total = Convert.ToDouble(t);
+                double entregado = Convert.ToDouble(p);
                 double vuelto = entregado - total;
 
-              
+
 
                 if (entregado > total)
                 {
+                    
                     txtVuelto.Text = vuelto.ToString("#,#", CultureInfo.InvariantCulture);
-        
+
+                }
+                else
+                {
+                    try
+                    {
+
+                        txtVuelto.Text = "0";
+                    }
+                    catch (Exception ex)
+                    {
+                        //MessageBox.Show(ex.ToString());
+                    }
+
                 }
 
 
             }
-            else
-            {
-                
-                    txtEntregado.Text = "0";
-                    txtVuelto.Text = "0";
-            
 
-            }
         }
 
         private void rbtnNo_Checked(object sender, RoutedEventArgs e)
